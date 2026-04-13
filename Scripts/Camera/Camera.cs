@@ -14,6 +14,29 @@ public partial class Camera : Camera2D
     // * PAN PROPERTIES * //
     private bool isPanning = false;
     private Vector2 panDelta = Vector2.Zero;
+    
+    // * INIT MAP THING OFFSETS * //
+    [Export] public Sprite2D MapImage;
+
+    public override void _Ready()
+    {
+        var mapSize = MapImage.Texture.GetSize() * MapImage.Scale;
+
+        LimitLeft = 0;
+        LimitTop = 0;
+        LimitRight = (int)mapSize.X;
+        LimitBottom = (int)mapSize.Y;
+
+        var viewportSize = GetViewportRect().Size;
+
+        float halfW = (viewportSize.X * 0.5f) / ZoomLevel;
+        float halfH = (viewportSize.Y * 0.5f) / ZoomLevel;
+
+        Position = new Vector2(
+            Mathf.Clamp(mapSize.X / 2f, halfW, mapSize.X - halfW),
+            Mathf.Clamp(mapSize.Y / 2f, halfH, mapSize.Y - halfH)
+        );
+    }
 
     public override void _Input(InputEvent @event)
     {
