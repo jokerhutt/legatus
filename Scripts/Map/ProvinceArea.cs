@@ -64,6 +64,28 @@ public partial class ProvinceArea : Area2D
         IsHovered = false;
         UpdateVisual();
     }
+
+    private void SetProvinceColors(MapMode mapMode)
+    {
+        switch (mapMode)
+        {
+            case MapMode.Default:
+                BaseColor = new Color(1, 1, 1, 0.5f);
+                HoverColor = new Color(1, 1, 1, 0.8f);
+                SelectedColor = new Color(1, 1, 0.5f, 0.8f);
+                break;
+            case MapMode.Faction:
+                BaseColor = new Color(0.6f, 0.4f, 0.2f, 0.5f);
+                HoverColor = new Color(0.6f, 0.4f, 0.2f, 0.8f);
+                SelectedColor = new Color(0.8f, 0.6f, 0.4f, 0.8f);
+                break;
+            case MapMode.Province:
+                BaseColor = new Color(0.4f, 0.6f, 1f, 0.5f);
+                HoverColor = new Color(0.4f, 0.6f, 1f, 0.8f);
+                SelectedColor = new Color(0.6f, 0.8f, 1f, 0.8f);
+                break;
+        }
+    }
     
     private void UpdateVisual()
     {
