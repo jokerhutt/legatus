@@ -1,6 +1,13 @@
+using Godot;
+using Practice.Scripts.State.map;
+
 namespace Practice.Scripts.State;
 
-public class GameState
+public partial class GameState : Node
 {
     
+     public SelectionState SelectionState = new SelectionState();
+     public MapModeState MapModeState = new MapModeState();
+
+
 }
