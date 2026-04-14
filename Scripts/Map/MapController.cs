@@ -14,12 +14,7 @@ public partial class MapController : Node2D
     [Export(PropertyHint.File, "*.txt")] 
     public string ProvinceMetadataPath;
     
-    [Export]
-    public PackedScene ProvinceAreaScene;
-
     [Export] public Node2D Provinces;
-    
-
 
     public override void _Ready()
     {
@@ -45,7 +40,7 @@ public partial class MapController : Node2D
 
         foreach (string provinceColor in provincesMetadataDict.Keys)
         {
-            var province = (ProvinceArea)ProvinceAreaScene.Instantiate();
+            var province = (ProvinceArea)GD.Load<PackedScene>("res://Scenes/ProvinceArea.tscn").Instantiate();
             string provinceName = provincesMetadataDict[provinceColor].ToString().Trim().ToLower();
             
             province.ProvinceId = provinceName;

@@ -1,5 +1,4 @@
 using Godot;
-using System.Collections.Generic;
 namespace Practice.Scripts.Map;
 
 public partial class ProvinceArea : Area2D
@@ -11,6 +10,8 @@ public partial class ProvinceArea : Area2D
 
     public override void _Ready()
     {
+        MouseEntered += OnMouseEntered;
+        MouseExited += OnMouseExited;
         InputEvent += OnInputEvent;
     }
 
@@ -18,6 +19,35 @@ public partial class ProvinceArea : Area2D
     {
         if (@event is InputEventMouseButton mb && mb.ButtonIndex == MouseButton.Left && mb.Pressed)
             GD.Print($"Clicked on province {ProvinceId}");
+    }
+    
+    private void OnMouseEntered()
+    {
+        GD.Print("ENTER");
+        foreach (Node node in GetChildren())
+        {
+            if (node is Polygon2D poly)
+                poly.Color = BaseColor.Lerp(Colors.White, 0.3f);
+        }
+    }
+
+    private void OnMouseExited()
+    {
+        UpdateVisual();
+    }
+    
+    private void UpdateVisual()
+    {
+
+        foreach (Node node in GetChildren())
+        {
+            if (node is Polygon2D poly)
+            {
+
+                    poly.Texture = null;
+                    poly.Color = new Color(BaseColor.R, BaseColor.G, BaseColor.B, 0.5f);
+            }
+        }
     }
     
 }
