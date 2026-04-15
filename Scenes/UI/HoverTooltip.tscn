@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlb5huq6wtlck"]
+
+[ext_resource type="Theme" uid="uid://dy1b0auwkyjnb" path="res://ui/ui_theme.tres" id="1_theme"]
+
+[sub_resource type="StyleBoxFlat" id="tooltip_bg"]
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+bg_color = Color(0.12, 0.08, 0.04, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6, 0.45, 0.1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="HoverTooltip" type="PanelContainer"]
+visible = false
+offset_right = 220.0
+offset_bottom = 120.0
+theme = ExtResource("1_theme")
+theme_override_styles/panel = SubResource("tooltip_bg")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TooltipTitle" type="Label" parent="VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.65, 0.13, 1)
+theme_override_font_sizes/font_size = 20
+text = "Tooltip Title"
+horizontal_alignment = 0
+
+[node name="Divider" type="HSeparator" parent="VBox"]
+layout_mode = 2
+
+[node name="TooltipBody" type="Label" parent="VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.85, 0.72, 1)
+theme_override_font_sizes/font_size = 16
+text = "Description text goes here.
+Second line of info."
+horizontal_alignment = 0
+autowrap_mode = 2
+
+[node name="TooltipStat" type="Label" parent="VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.56, 0.2, 1)
+theme_override_font_sizes/font_size = 15
+text = "+5 Food per turn"
+horizontal_alignment = 0
+

@@ -4,6 +4,7 @@ public enum MapMode
 {
     Default,
     Province,
+    Food,
     Faction
     
 }

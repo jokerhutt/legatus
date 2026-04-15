@@ -25,6 +25,7 @@ public partial class ProvinceArea : Area2D
     {
         var _gameState = GetNode<GameState>("/root/GameState");
         SelectionState = _gameState.SelectionState;
+        ProvinceMap = _gameState.ProvinceMap;
         SelectionState.SelectionChanged += OnSelectionChanged;
         MapModeState = _gameState.MapModeState;
         MapModeState.MapModeChanged += OnMapModeChanged;
@@ -44,7 +45,7 @@ public partial class ProvinceArea : Area2D
     
     private void OnMapModeChanged(int mode)
     {
-        
+        SetProvinceColors((MapMode)mode);
         UpdateVisual();
     }
     
@@ -90,7 +91,28 @@ public partial class ProvinceArea : Area2D
                 HoverColor = new Color(0.4f, 0.6f, 1f, 0.8f);
                 SelectedColor = new Color(0.6f, 0.8f, 1f, 0.8f);
                 break;
+            case MapMode.Food:
+                SetFoodMapModeColors(Province);
+                break;
         }
+    }
+    
+    private void SetFoodMapModeColors(Province.Entity.Province p)
+    {
+        float food = p.FoodSurplus;
+
+        float max = 10f;
+        float t = Mathf.Clamp(food / max, 0f, 1f);
+
+        Color color = new Color(
+            1f - t,
+            t,
+            0f
+        );
+
+        BaseColor = new Color(color.R, color.G, color.B, 0.5f);
+        HoverColor = new Color(color.R, color.G, color.B, 0.8f);
+        SelectedColor = new Color(color.R, color.G, 0.3f, 0.9f);
     }
     
     private void UpdateVisual()
