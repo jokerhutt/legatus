@@ -1,35 +1,13 @@
 using SCG = System.Collections.Generic;
 using Godot;
+using Practice.Scripts.Abstract;
 using GDC = Godot.Collections;
 namespace Practice.Scripts.Province.Dictionary;
 
-public class ProvinceMap
+public class ProvinceMap : BaseMap<Entity.Province>
 {
-    public SCG.Dictionary<string, Entity.Province> Provinces = new();
-
-    public void Initialize(GDC.Array list)
+    public void Add(Entity.Province p)
     {
-        foreach (GDC.Dictionary p in list)
-        {
-            var province = new Entity.Province
-            {
-                Id = p["id"].ToString(),
-                Name = p["name"].ToString()
-            };
-            
-            Provinces[province.Id] = province;
-        }
+        Items[p.Id] = p;
     }
-    
-    public bool TryGet(string id, out Entity.Province province)
-    {
-        return Provinces.TryGetValue(id, out province);
-    }
-    
-    public Entity.Province Get(string id)
-    {
-        return Provinces[id];
-    }
-    
-    
 }

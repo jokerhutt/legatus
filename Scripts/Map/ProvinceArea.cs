@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using Godot;
+using Practice.Scripts.Province.Dictionary;
 using Practice.Scripts.State;
 using Practice.Scripts.State.map;
 
@@ -10,6 +12,8 @@ public partial class ProvinceArea : Area2D
     [Export] public Color BaseColor = new Color(1, 1, 1, 0.5f);
     [Export] public Color HoverColor = new Color(1, 1, 1, 0.8f);
     [Export] public Color SelectedColor = new Color(1, 1, 0.5f, 0.8f);
+    
+    private ProvinceMap ProvinceMap;
 
     private SelectionState SelectionState;
     private MapModeState MapModeState;
@@ -67,6 +71,8 @@ public partial class ProvinceArea : Area2D
 
     private void SetProvinceColors(MapMode mapMode)
     {
+        var Province = ProvinceMap.Get(ProvinceId);
+        
         switch (mapMode)
         {
             case MapMode.Default:
@@ -75,7 +81,7 @@ public partial class ProvinceArea : Area2D
                 SelectedColor = new Color(1, 1, 0.5f, 0.8f);
                 break;
             case MapMode.Faction:
-                BaseColor = new Color(0.6f, 0.4f, 0.2f, 0.5f);
+                BaseColor = new Color(0.4f, 0.6f, 0.2f, 0.5f);
                 HoverColor = new Color(0.6f, 0.4f, 0.2f, 0.8f);
                 SelectedColor = new Color(0.8f, 0.6f, 0.4f, 0.8f);
                 break;
@@ -101,6 +107,34 @@ public partial class ProvinceArea : Area2D
             {
                 poly.Color = color;
             }
+        }
+    }
+    
+    public void BuildGeometry(Vector2[][] polygons, Color color)
+    {
+        foreach (var poly in polygons)
+        {
+            var collision = new CollisionPolygon2D { Polygon = poly };
+
+            var polygon = new Polygon2D
+            {
+                Polygon = poly,
+                Color = color
+            };
+
+            var line = new Line2D
+            {
+                Width = 2,
+                DefaultColor = Colors.Black
+            };
+
+            var closed = new List<Vector2>(poly);
+            closed.Add(poly[0]);
+            line.Points = closed.ToArray();
+
+            AddChild(line);
+            AddChild(collision);
+            AddChild(polygon);
         }
     }
     
