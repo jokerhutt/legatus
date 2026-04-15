@@ -31,6 +31,17 @@ public class ProvinceService
         p.FoodSurplus = JsonUtil.GetInt(data, "food_surplus") ?? 0;
         p.SetHappiness(JsonUtil.GetInt(data, "happiness") ?? 50);
         
+        var buildings = JsonUtil.GetArray(data, "buildings");
+        if (buildings != null)
+        {
+            foreach(GDC.Dictionary b in buildings)
+            {
+                var buildingId = JsonUtil.GetString(b, "buildingId");
+                var level = JsonUtil.GetInt(b, "level") ?? 1;
+                p.Buildings.Add(new ProvinceBuilding(buildingId, level));
+            }
+        }
+        
         _provinceMap.Add(p);
     }
     

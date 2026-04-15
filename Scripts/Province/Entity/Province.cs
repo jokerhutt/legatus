@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 
 namespace Practice.Scripts.Province.Entity;
@@ -13,6 +14,8 @@ public class Province
     public int FoodSurplus;
     private int Happiness;
     public int TaxLevel;
+
+    public List<ProvinceBuilding> Buildings = new();
     
     public string FactionId;
     public string TerrainId;

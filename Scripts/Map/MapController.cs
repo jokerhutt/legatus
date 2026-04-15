@@ -1,4 +1,5 @@
 using Godot;
+using Practice.Scripts.Buildings.Model;
 using Practice.Scripts.Faction;
 using Practice.Scripts.Province;
 using Practice.Scripts.State;
@@ -24,6 +25,9 @@ public partial class MapController : Node2D
     [Export(PropertyHint.File, "*.json")]
     public string FactionDataPath;
     
+    [Export(PropertyHint.File, "*.json")]
+    public string BuildingDataPath;
+    
     [Export] public Node2D Provinces;
 
     private GameState GameState;
@@ -39,6 +43,7 @@ public partial class MapController : Node2D
 
         var scale = MapImage.Scale;
         InitializeProvinceMap(scale);
+        InitializeBuildingMap(FSUtil.LoadJson(BuildingDataPath));
         InitializeTerrainMap(FSUtil.LoadJson(TerrainDataPath));
         
         fs.InitializeFactions(FSUtil.LoadJson(FactionDataPath));
@@ -59,6 +64,46 @@ public partial class MapController : Node2D
                 };
                 terrainMap.Add(terrain.Id, terrain);
             }
+    }
+
+    private void InitializeBuildingMap(GDC.Dictionary data)
+    {
+        var buildingMap = GameState.BuildingMap;
+        var buildingList = (GDC.Array<GDC.Dictionary>)data["buildings"];
+        foreach (GDC.Dictionary b in buildingList)
+        {
+            var building = new Building()
+            {
+                Id = b["id"].ToString(),
+                Name = b["name"].ToString(),
+                Description = b.ContainsKey("description") ? b["description"].ToString() : "",
+                Levels = new SCG.List<BuildingLevel>()
+            };
+
+            var levels = (Godot.Collections.Array)b["levels"];
+
+            foreach (Godot.Collections.Dictionary l in levels)
+            {
+                var level = new BuildingLevel()
+                {
+                    Level = (int)l["level"],
+                    Cost = (int)l["cost"],
+                    Maintenance = (int)l["maintenance"],
+                    FoodYield = (int)l["foodYield"],
+                    FoodMultiplier = (float)l["foodMultiplier"],
+                    GoldYield = (int)l["goldYield"],
+                    GoldMultiplier = (float)l["goldMultiplier"],
+                    DefenseBonus = (int)l["defenseBonus"],
+                    MapTexture = l.ContainsKey("mapTexture") ? GD.Load<Texture2D>((string)l["mapTexture"]) : null,
+                    IconTexture = l.ContainsKey("iconTexture") ? GD.Load<Texture2D>((string)l["iconTexture"]) : null
+                };
+
+                building.Levels.Add(level);
+            }
+
+            buildingMap.Add(building.Id, building); 
+        }
+            
     }
 
     private void InitializeProvinceMap(Vector2 mapScale)

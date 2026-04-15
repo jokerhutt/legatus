@@ -30,5 +30,8 @@ public partial class Bootstrap : Node
         // deps
         map.Init(_gs, _provinceService, _factionService);
         menu.Init(_provinceService, _factionService, _gs.TerrainMap, _gs.SelectionState);
+
+        _gs.PlayerFactionId = "ROM";
+
     }
 }
