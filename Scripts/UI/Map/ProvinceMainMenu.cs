@@ -1,4 +1,5 @@
 using Godot;
+using Practice.Scripts.Buildings.Dictionary;
 using Practice.Scripts.Faction;
 using Practice.Scripts.Map;
 using Practice.Scripts.Province;
@@ -12,6 +13,7 @@ public partial class ProvinceMainMenu : MarginContainer
     private ProvinceService _provinceService;
     private FactionService _factionService;
     private TerrainMap _terrainMap;
+    private BuildingMap _buildingMap;
     public System.Action OnOpenBuildingMenu;
     private string _provinceId;
 

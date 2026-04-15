@@ -14,6 +14,23 @@ public class ProvinceService
     {
         _provinceMap = provinceMap;
     }
+
+    public void AddBuilding(string BuildingId, string provinceId)
+    {
+        var province = GetProvince(provinceId);
+        if (province == null) return;
+        if (!HasBuildingSlots(provinceId)) return;
+        
+        province.Buildings.Add(new ProvinceBuilding(BuildingId, 1));
+
+    }
+
+    public bool HasBuildingSlots(string provinceId)
+    {
+        var province = GetProvince(provinceId);
+        if (province == null) return false;
+        return province.Buildings.Count <= province.BuildingSlots;
+    }
     
     public Province GetProvince(string provinceId)
     {

@@ -26,6 +26,7 @@ public class FactionService
             {
                 Id = f["id"].ToString(),
                 Name = f["name"].ToString(),
+                Coins = (int)f["coins"],
                 Color = new Godot.Color(f["color"].ToString())
             };
 

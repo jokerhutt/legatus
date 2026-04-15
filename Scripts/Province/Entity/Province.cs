@@ -12,6 +12,9 @@ public class Province
 
     public int Population;
     public int FoodSurplus;
+
+    public int BuildingSlots;
+    
     private int Happiness;
     public int TaxLevel;
 
@@ -25,6 +28,7 @@ public class Province
         Id = id;
         Color = color;
         TaxLevel = 1;
+        BuildingSlots = 4;
     }
     
     public int GetHappiness()
