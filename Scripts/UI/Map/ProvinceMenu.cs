@@ -23,6 +23,8 @@ public partial class ProvinceMenu : PanelContainer
     private Label OwnerName;
     private Label TerrainName;
     private TextureRect TerrainIcon;
+
+    private Button CloseButton;
     
     // == PROVINCE == //
     private Label PopulationCountLabel;
@@ -41,6 +43,9 @@ public partial class ProvinceMenu : PanelContainer
         OwnerName = GetNode<Label>("%OwnerName");
         TerrainName = GetNode<Label>("%TerrainName");
         TerrainIcon = GetNode<TextureRect>("%TerrainIcon");
+        
+        CloseButton = GetNode<Button>("%CloseButton");
+        CloseButton.Pressed += Close;
 
         PopulationCountLabel = GetNode<Label>("%PopulationCountLabel");
         HappinessLevelLabel = GetNode<Label>("%HappinessLevelLabel");
@@ -62,14 +67,19 @@ public partial class ProvinceMenu : PanelContainer
     {
         if ((SelectionType)type != SelectionType.Province || id == null)
         {
-            CurrentProvinceId = null;
-            Hide();
+            Close();
             return;
         }
 
         CurrentProvinceId = id;
         Redraw();
         Show();
+    }
+
+    private void Close()
+    {
+        CurrentProvinceId = null;
+        Hide();
     }
 
     public void Redraw()
