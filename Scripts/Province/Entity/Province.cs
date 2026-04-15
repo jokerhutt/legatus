@@ -12,14 +12,21 @@ public class Province
     public int Population;
     public int FoodSurplus;
     private int Happiness;
+    public int TaxLevel;
     
     public string FactionId;
-    public int TerrainId;
+    public string TerrainId;
     
     public Province(string id, Color color)
     {
         Id = id;
         Color = color;
+        TaxLevel = 1;
+    }
+    
+    public int GetHappiness()
+    {
+        return Happiness;
     }
     
     public void SetHappiness(int value)

@@ -1,4 +1,5 @@
 using Godot;
+using Practice.Scripts.Faction;
 using Practice.Scripts.Province;
 using Practice.Scripts.State;
 using Practice.Scripts.Util;
@@ -17,18 +18,47 @@ public partial class MapController : Node2D
     [Export(PropertyHint.File, "*.txt")] 
     public string ProvinceMetadataPath;
     
+    [Export(PropertyHint.File, "*.json")]
+    public string TerrainDataPath;
+    
+    [Export(PropertyHint.File, "*.json")]
+    public string FactionDataPath;
+    
     [Export] public Node2D Provinces;
 
     private GameState GameState;
 
     public ProvinceService ProvinceService;
+    public FactionService FactionService;
 
-    public override void _Ready()
+    public void Init(GameState gs, ProvinceService ps, FactionService fs)
     {
+        GameState = gs;
+        ProvinceService = ps;
+        FactionService = fs;
+
         var scale = MapImage.Scale;
-        GameState = GetNode<GameState>("/root/GameState");
-        ProvinceService = new ProvinceService(GameState.ProvinceMap);
         InitializeProvinceMap(scale);
+        InitializeTerrainMap(FSUtil.LoadJson(TerrainDataPath));
+        
+        fs.InitializeFactions(FSUtil.LoadJson(FactionDataPath));
+    }
+    
+
+    private void InitializeTerrainMap(GDC.Dictionary data)
+    {
+            var terrainMap = GameState.TerrainMap;
+            var terrainList = (GDC.Array)data["terrains"];
+            foreach (GDC.Dictionary t in terrainList)
+            {
+                var terrain = new Terrain
+                {
+                    Id = JsonUtil.GetString(t, "id"),
+                    Name = JsonUtil.GetString(t, "name") ?? "Unknown",
+                    IconPath = t["icon"].ToString()
+                };
+                terrainMap.Add(terrain.Id, terrain);
+            }
     }
 
     private void InitializeProvinceMap(Vector2 mapScale)

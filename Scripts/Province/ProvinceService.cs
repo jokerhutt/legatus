@@ -15,13 +15,18 @@ public class ProvinceService
         _provinceMap = provinceMap;
     }
     
+    public Province GetProvince(string provinceId)
+    {
+        return _provinceMap.Get(provinceId);
+    }
+    
     
 
     public void InitializeProvinces(string regionName, string regionColor, GDC.Dictionary data)
     {
         var p = new Province(id: regionName, color: new Color(regionColor));
         p.FactionId = JsonUtil.GetString(data, "ownerId");
-        p.TerrainId = JsonUtil.RequireInt(data, "terrainId");
+        p.TerrainId = JsonUtil.GetString(data, "terrainId") ?? "0";
         p.Population = JsonUtil.GetInt(data, "population") ?? 1;
         p.FoodSurplus = JsonUtil.GetInt(data, "food_surplus") ?? 0;
         p.SetHappiness(JsonUtil.GetInt(data, "happiness") ?? 50);
