@@ -9,118 +9,76 @@ namespace Practice.Scripts.UI.Map;
 
 public partial class ProvinceMenu : PanelContainer
 {
+    private string _currentProvinceId;
 
-    private string CurrentProvinceId;
-    
     private SelectionState _selectionState;
     private ProvinceService _provinceService;
     private FactionService _factionService;
     private TerrainMap _terrainMap;
 
-    // == HEADER == //
-    
-    private Label ProvinceName;
-    private Label OwnerName;
-    private Label TerrainName;
-    private TextureRect TerrainIcon;
+    private ProvinceMainMenu _mainMenu;
+    private BuildingMenu _buildingMenu;
 
-    private Button CloseButton;
-    
-    // == PROVINCE == //
-    private Label PopulationCountLabel;
-    private Label HappinessLevelLabel;
-    private Label FoodSurplusLabel;
-    private Label TaxLevelLabel;
-    
-    // == ARMY == //
-    [Export] public VBoxContainer ArmyColumn;
-    private PackedScene _armyCardScene = GD.Load<PackedScene>("res://Scenes/UI/CompactArmyCard.tscn");
-    
     public override void _Ready()
     {
-        GD.Print(GetTreeStringPretty());
-        ProvinceName = GetNode<Label>("%ProvinceName");
-        OwnerName = GetNode<Label>("%OwnerName");
-        TerrainName = GetNode<Label>("%TerrainName");
-        TerrainIcon = GetNode<TextureRect>("%TerrainIcon");
-        
-        CloseButton = GetNode<Button>("%CloseButton");
-        CloseButton.Pressed += Close;
-
-        PopulationCountLabel = GetNode<Label>("%PopulationCountLabel");
-        HappinessLevelLabel = GetNode<Label>("%HappinessLevelLabel");
-        FoodSurplusLabel = GetNode<Label>("%FoodSurplusLabel");
-        TaxLevelLabel = GetNode<Label>("%TaxLevelLabel");
+        _mainMenu = GetNode<ProvinceMainMenu>("MainMenu");
+        _buildingMenu = GetNode<BuildingMenu>("BuildingMenu");
+        _mainMenu.OnOpenBuildingMenu = SetModeBuilding;
     }
-    
-    public void Init(ProvinceService provinceService, FactionService factionService, TerrainMap terrainMap, SelectionState selectionState)
+
+    public void Init(
+        ProvinceService provinceService,
+        FactionService factionService,
+        TerrainMap terrainMap,
+        SelectionState selectionState)
     {
         _provinceService = provinceService;
         _factionService = factionService;
         _terrainMap = terrainMap;
-        
+
         _selectionState = selectionState;
         _selectionState.SelectionChanged += OnSelectionChanged;
+
+        _mainMenu.Init(provinceService, factionService, terrainMap);
+        _mainMenu.OnClose = Close;
+        
+        _buildingMenu.OnClose = SetModeMain;
+        
+
     }
-    
+
     private void OnSelectionChanged(int type, string id)
     {
         if ((SelectionType)type != SelectionType.Province || id == null)
         {
-            Close();
+            Hide();
             return;
         }
 
-        CurrentProvinceId = id;
-        Redraw();
+        _currentProvinceId = id;
+
+        _mainMenu.SetProvince(id);
+        SetModeMain();
+
         Show();
     }
-
+    
     private void Close()
     {
-        CurrentProvinceId = null;
+        _currentProvinceId = null;
         Hide();
     }
 
-    public void Redraw()
+    private void SetModeMain()
     {
-        if (CurrentProvinceId == null)
-            return;
-
-        var p = _provinceService.GetProvince(CurrentProvinceId);
-        var f = _factionService.GetFaction(p.FactionId);
-        var t = _terrainMap.Get(p.TerrainId);
-
-        // Header
-        ProvinceName.Text = p.Id;
-        OwnerName.Text = f.Name;
-        TerrainName.Text = t.Name;
-        
-        // Province Overview
-        PopulationCountLabel.Text = $"Population: {p.Population}";
-        HappinessLevelLabel.Text = $"Happiness: {p.GetHappiness()}";
-        FoodSurplusLabel.Text = $"Food Surplus: {p.FoodSurplus}";
-        TaxLevelLabel.Text = $"Tax Level: {p.TaxLevel}";
-
-        TerrainIcon.Texture = GD.Load<Texture2D>(t.IconPath);
-        
-        UpdateArmies();
-        
+        _mainMenu.Show();
+        _buildingMenu.Hide();
     }
 
-    public void UpdateArmies()
+    private void SetModeBuilding()
     {
-        // clear old cards
-        foreach (Node child in ArmyColumn.GetChildren())
-        {
-            child.QueueFree();
-        }
-
-        var card = _armyCardScene.Instantiate<CompactArmyCard>();
-        ArmyColumn.AddChild(card);
-        card.SetArmy("Legio I", 10, 1000);
+        _mainMenu.Hide();
+        _buildingMenu.Show();
+        _buildingMenu.UpdateBuildingList();
     }
-
-
-
 }
