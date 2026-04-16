@@ -1,3 +1,4 @@
+using Practice.Scripts.Economy;
 using Practice.Scripts.Faction;
 using Practice.Scripts.Map;
 using Practice.Scripts.UI.Map;
@@ -15,6 +16,7 @@ public partial class Bootstrap : Node
 
     private ProvinceService _provinceService;
     private FactionService _factionService;
+    private EconomyService _economyService;
 
     public override void _Ready()
     {
@@ -23,6 +25,7 @@ public partial class Bootstrap : Node
         // services
         _factionService = new FactionService(_gs.FactionMap, _gs.ProvinceMap);
         _provinceService = new ProvinceService(_gs.ProvinceMap);
+        _economyService = new EconomyService(_gs.FactionMap, _provinceService, _gs.BuildingMap);
 
         // systems
         var map = GetNode<MapController>("MapController");
@@ -34,7 +37,7 @@ public partial class Bootstrap : Node
         _gs.PlayerFactionId = "ROM";
         
         // UI
-        menu.Init(_provinceService, _factionService, _gs.TerrainMap, _gs.SelectionState);
+        menu.Init(_provinceService, _factionService, _gs.TerrainMap, _gs.SelectionState, _economyService);
         topBar.Init(_factionService, _gs.PlayerFactionId);
 
 

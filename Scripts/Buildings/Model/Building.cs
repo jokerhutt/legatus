@@ -8,4 +8,15 @@ public class Building
     public string Name;
     public string Description;
     public List<BuildingLevel> Levels; 
+    
+    public int GetCostForLevel(int level)
+    {
+        return Levels[level].Cost;
+    }
+    
+    public bool IsMaxLevel(int level)
+    {
+        return level >= Levels.Count - 1;
+    }
+    
 }

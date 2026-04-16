@@ -7,6 +7,7 @@ public partial class BuildingMenu : PanelContainer
 {
 
     private Button ShopCloseButton;
+    public System.Action<string> OnBuyBuilding;
 
     public System.Action OnClose;
 
@@ -32,7 +33,10 @@ public partial class BuildingMenu : PanelContainer
         
         var card = _buildingCardScene.Instantiate<ShopBuildingCard>();
         BuildingList.AddChild(card);
-        card.SetData("Blacksmith", "Unlocks new weapons and armor for your armies.", 100);
+        card.SetData("Blacksmith", "Unlocks new weapons and armor for your armies.", 100, "aqueduct");
+        
+        card.OnBuy = buildingId => OnBuyBuilding?.Invoke(buildingId);
+
 
     }
 

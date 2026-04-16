@@ -1,5 +1,6 @@
 using Godot;
 using Practice.Scripts.Buildings.Dictionary;
+using Practice.Scripts.Economy;
 using Practice.Scripts.Faction;
 using Practice.Scripts.Map;
 using Practice.Scripts.Province;
@@ -15,6 +16,7 @@ public partial class ProvinceMenu : PanelContainer
     private SelectionState _selectionState;
     private ProvinceService _provinceService;
     private FactionService _factionService;
+    private EconomyService _economyService;
     
     private BuildingMap _buildingMap;
     private TerrainMap _terrainMap;
@@ -33,11 +35,14 @@ public partial class ProvinceMenu : PanelContainer
         ProvinceService provinceService,
         FactionService factionService,
         TerrainMap terrainMap,
-        SelectionState selectionState)
+        SelectionState selectionState,
+        EconomyService economyService)
     {
         _provinceService = provinceService;
         _factionService = factionService;
+        _economyService = economyService;
         _terrainMap = terrainMap;
+        
 
         _selectionState = selectionState;
         _selectionState.SelectionChanged += OnSelectionChanged;
@@ -46,6 +51,7 @@ public partial class ProvinceMenu : PanelContainer
         _mainMenu.OnClose = Close;
         
         _buildingMenu.OnClose = SetModeMain;
+        _buildingMenu.OnBuyBuilding = HandleBuyBuilding;
         
 
     }
@@ -65,6 +71,29 @@ public partial class ProvinceMenu : PanelContainer
 
         Show();
     }
+    
+    private void HandleBuyBuilding(string buildingId)
+    {
+        if (string.IsNullOrEmpty(_currentProvinceId))
+            return;
+
+        var province = _provinceService.GetProvince(_currentProvinceId);
+        if (province == null || string.IsNullOrEmpty(province.FactionId))
+            return;
+
+        var success = _economyService.BuyBuilding(
+            province.FactionId,
+            _currentProvinceId,
+            buildingId
+        );
+
+        if (!success)
+            return;
+
+        _mainMenu.SetProvince(_currentProvinceId);
+        _buildingMenu.UpdateBuildingList();
+    }
+
     
     private void Close()
     {
