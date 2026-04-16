@@ -1,6 +1,7 @@
 using Practice.Scripts.Faction;
 using Practice.Scripts.Map;
 using Practice.Scripts.UI.Map;
+using Practice.Scripts.UI.Map.TopBar;
 
 namespace Practice.Scripts;
 
@@ -20,18 +21,22 @@ public partial class Bootstrap : Node
         _gs = GetNode<GameState>("/root/GameState");
 
         // services
-        _factionService = new FactionService(_gs.FactionMap);
+        _factionService = new FactionService(_gs.FactionMap, _gs.ProvinceMap);
         _provinceService = new ProvinceService(_gs.ProvinceMap);
 
         // systems
         var map = GetNode<MapController>("MapController");
         var menu = GetNode<ProvinceMenu>("CanvasLayer/ProvinceMenu");
+        var topBar = GetNode<TopBar>("CanvasLayer/TopBar");
 
         // deps
         map.Init(_gs, _provinceService, _factionService);
-        menu.Init(_provinceService, _factionService, _gs.TerrainMap, _gs.SelectionState);
-
         _gs.PlayerFactionId = "ROM";
+        
+        // UI
+        menu.Init(_provinceService, _factionService, _gs.TerrainMap, _gs.SelectionState);
+        topBar.Init(_factionService, _gs.PlayerFactionId);
+
 
     }
 }

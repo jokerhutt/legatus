@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvw4mch1pw2g6"]
+
+[ext_resource type="Theme" uid="uid://dy1b0auwkyjnb" path="res://ui/ui_theme.tres" id="1_theme"]
+[ext_resource type="Texture2D" uid="uid://cgkqe16ikoyyw" path="res://icon.svg" id="2_icon"]
+
+[node name="IconTextGroup" type="HBoxContainer"]
+theme = ExtResource("1_theme")
+theme_override_constants/separation = 6
+
+[node name="Icon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("2_icon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "0"
+vertical_alignment = 1
+
