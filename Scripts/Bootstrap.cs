@@ -37,7 +37,7 @@ public partial class Bootstrap : Node
         _gs.PlayerFactionId = "ROM";
         
         // UI
-        menu.Init(_provinceService, _factionService, _gs.TerrainMap, _gs.SelectionState, _economyService, _gs.BuildingMap);
+        menu.Init(_provinceService, _factionService, _gs.TerrainMap, _gs.SelectionState, _economyService, _gs.BuildingMap, _gs.PlayerFactionId);
         topBar.Init(_factionService, _gs.PlayerFactionId);
 
 

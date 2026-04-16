@@ -28,12 +28,15 @@ public partial class ShopBuildingCard : PanelContainer
 
     }
 
-    public void SetData(string name, string desc, int cost, string buildingId)
+    public void SetData(string name, string desc, int cost, string buildingId, bool canBuy)
     {
         _buildingId = buildingId;
         Name.Text = name;
         Desc.Text = desc;
         Cost.Text = $"Cost: {cost}";
+        
+        BuyButton.Disabled = !canBuy;
+        
     }
 
 }

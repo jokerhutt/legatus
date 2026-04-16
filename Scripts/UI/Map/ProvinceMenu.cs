@@ -42,7 +42,8 @@ public partial class ProvinceMenu : PanelContainer
         TerrainMap terrainMap,
         SelectionState selectionState,
         EconomyService economyService,
-        BuildingMap buildingMap
+        BuildingMap buildingMap,
+        string playerFactionId
         )
     {
         _provinceService = provinceService;
@@ -58,7 +59,7 @@ public partial class ProvinceMenu : PanelContainer
         _mainMenu.Init(provinceService, factionService, terrainMap, buildingMap);
         _mainMenu.OnClose = Close;
         
-        _buildingMenu.Init(provinceService, _buildingMap);
+        _buildingMenu.Init(provinceService, _buildingMap, _economyService, playerFactionId);
         _buildingMenu.OnClose = SetModeMain;
         _buildingMenu.OnBuyBuilding = HandleBuyBuilding;
         

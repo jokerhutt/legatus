@@ -1,6 +1,7 @@
 using System.Linq;
 using Godot;
 using Practice.Scripts.Buildings.Dictionary;
+using Practice.Scripts.Economy;
 using Practice.Scripts.Province;
 using Practice.Scripts.UI.Map.Building;
 
@@ -11,6 +12,8 @@ public partial class BuildingMenu : PanelContainer
     
     private ProvinceService _provinceService;
     private BuildingMap _buildingMap;
+    private EconomyService _economyService;
+    private string PlayerFactionId;
     
 
     private Button ShopCloseButton;
@@ -27,10 +30,12 @@ public partial class BuildingMenu : PanelContainer
         ShopCloseButton.Pressed += () => OnClose?.Invoke();
     }
 
-    public void Init(ProvinceService provinceService, BuildingMap buildingMap)
+    public void Init(ProvinceService provinceService, BuildingMap buildingMap, EconomyService economyService, string playerFactionId)
     {
         _provinceService = provinceService;
         _buildingMap = buildingMap;
+        _economyService = economyService;
+        PlayerFactionId = playerFactionId;
     }
 
 
@@ -68,11 +73,14 @@ public partial class BuildingMenu : PanelContainer
                 ? building.Name
                 : $"{building.Name} Lv.{nextLevel}";
 
+            var canBuy = _economyService.CanBuyBuilding(PlayerFactionId, province.Id, building.Id);
+            
             card.SetData(
                 displayName,
                 building.Description,
                 cost,
-                building.Id
+                building.Id,
+                canBuy
             );
 
             card.OnBuy = buildingId => OnBuyBuilding?.Invoke(buildingId);
