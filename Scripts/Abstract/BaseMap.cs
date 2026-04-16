@@ -20,6 +20,14 @@ public abstract class BaseMap<T>
     {
         return Items[id];
     }
+    
+    public IEnumerable<T> GetManyStrict(IEnumerable<string> ids)
+    {
+        foreach (var id in ids)
+        {
+            yield return Items[id];
+        }
+    }
 
     public IEnumerable<T> GetAll()
     {

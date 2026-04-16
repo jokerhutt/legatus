@@ -33,14 +33,14 @@ public partial class ProvinceBuildingSlot : PanelContainer
         _current = ui;
     }
 
-    public void ShowBuilding()
+    public void ShowBuilding(string id, int level, Texture2D texture)
     {
         Clear();
 
         var ui = _buildingScene.Instantiate<BuildingSlot>();
         Container.AddChild(ui);
 
-        ui.SetData("Blacksmith", 1);
+        ui.SetData(id, level, texture);
 
         _current = ui;
     }

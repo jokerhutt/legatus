@@ -48,11 +48,13 @@ public partial class ProvinceMainMenu : MarginContainer
     public void Init(
         ProvinceService provinceService,
         FactionService factionService,
-        TerrainMap terrainMap)
+        TerrainMap terrainMap,
+        BuildingMap buildingMap)
     {
         _provinceService = provinceService;
         _factionService = factionService;
         _terrainMap = terrainMap;
+        _buildingMap = buildingMap;
     }
 
     public void SetProvince(string provinceId)
@@ -76,7 +78,7 @@ public partial class ProvinceMainMenu : MarginContainer
         TerrainIcon.Texture = GD.Load<Texture2D>(t.IconPath);
 
         UpdateArmies();
-        UpdateBuildings();
+        UpdateBuildings(p);
     }
 
     private void UpdateArmies()
@@ -95,7 +97,7 @@ public partial class ProvinceMainMenu : MarginContainer
         card.SetArmy("Legio I", 10, 1000);
     }
 
-    private void UpdateBuildings()
+    private void UpdateBuildings(Province.Entity.Province province)
     {
         if (BuildingSlots == null)
             return;
@@ -105,16 +107,33 @@ public partial class ProvinceMainMenu : MarginContainer
             if (child is ProvinceBuildingSlot)
                 child.QueueFree();
         }
-        
-        var slot = _buildingSlotsScene.Instantiate<ProvinceBuildingSlot>();
-        BuildingSlots.AddChild(slot);
-        slot.ShowBuilding();
-        
-        var emptySlot = _buildingSlotsScene.Instantiate<ProvinceBuildingSlot>();
-        BuildingSlots.AddChild(emptySlot);
-        emptySlot.OnRequestBuild = () => OnOpenBuildingMenu?.Invoke();
-        emptySlot.ShowEmpty();
-        
+
+        foreach (var pb in province.Buildings)
+        {
+            var def = _buildingMap.Get(pb.Id);
+            if (def == null)
+                continue;
+
+            if (pb.Level < 0 || pb.Level >= def.Levels.Count)
+                continue;
+
+            var levelData = def.Levels[pb.Level];
+
+            var slot = _buildingSlotsScene.Instantiate<ProvinceBuildingSlot>();
+            BuildingSlots.AddChild(slot);
+            slot.ShowBuilding(def.Id, pb.Level, levelData.IconTexture);
+        }
+
+        int emptyCount = province.BuildingSlots - province.Buildings.Count;
+
+        for (int i = 0; i < emptyCount; i++)
+        {
+            var emptySlot = _buildingSlotsScene.Instantiate<ProvinceBuildingSlot>();
+            BuildingSlots.AddChild(emptySlot);
+
+            emptySlot.OnRequestBuild = () => OnOpenBuildingMenu?.Invoke();
+            emptySlot.ShowEmpty();
+        }
     }
     
 }

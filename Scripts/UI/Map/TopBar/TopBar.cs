@@ -1,4 +1,5 @@
 using Godot;
+using Practice.Scripts.Economy.Events;
 using Practice.Scripts.Faction;
 
 namespace Practice.Scripts.UI.Map.TopBar;
@@ -17,6 +18,8 @@ public partial class TopBar : PanelContainer
     
     private FactionService _factionService;
     private string PlayerFactionId;
+
+    private EconomyEvents EconomyEvents;
     
     public override void _Ready()
     {
@@ -28,6 +31,16 @@ public partial class TopBar : PanelContainer
         
         InfoButton.Pressed += OnInfoButtonPressed;
         SettingsButton.Pressed += OnSettingsButtonPressed;
+        
+        EconomyEvents = GetNode<EconomyEvents>("/root/EconomyEvents");
+        
+        EconomyEvents.BalanceChanged += OnBalanceChanged;
+    }
+    
+    private void OnBalanceChanged(int newBalance, string factionId)
+    {
+        GD.Print($"TopBar received BalanceChanged: {newBalance} for faction {factionId}");
+        Refresh();
     }
     
     public void Init(FactionService factionService, string playerFactionId)

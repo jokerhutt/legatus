@@ -1,6 +1,7 @@
 using Godot;
 using Practice.Scripts.Buildings.Dictionary;
 using Practice.Scripts.Economy;
+using Practice.Scripts.Economy.Events;
 using Practice.Scripts.Faction;
 using Practice.Scripts.Map;
 using Practice.Scripts.Province;
@@ -24,6 +25,10 @@ public partial class ProvinceMenu : PanelContainer
     private ProvinceMainMenu _mainMenu;
     private BuildingMenu _buildingMenu;
 
+    private EconomyEvents EconomyEvents;
+    
+    
+
     public override void _Ready()
     {
         _mainMenu = GetNode<ProvinceMainMenu>("MainMenu");
@@ -36,23 +41,28 @@ public partial class ProvinceMenu : PanelContainer
         FactionService factionService,
         TerrainMap terrainMap,
         SelectionState selectionState,
-        EconomyService economyService)
+        EconomyService economyService,
+        BuildingMap buildingMap
+        )
     {
         _provinceService = provinceService;
         _factionService = factionService;
         _economyService = economyService;
         _terrainMap = terrainMap;
+        _buildingMap = buildingMap;
         
 
         _selectionState = selectionState;
         _selectionState.SelectionChanged += OnSelectionChanged;
 
-        _mainMenu.Init(provinceService, factionService, terrainMap);
+        _mainMenu.Init(provinceService, factionService, terrainMap, buildingMap);
         _mainMenu.OnClose = Close;
         
+        _buildingMenu.Init(provinceService, _buildingMap);
         _buildingMenu.OnClose = SetModeMain;
         _buildingMenu.OnBuyBuilding = HandleBuyBuilding;
         
+        EconomyEvents = GetNode<EconomyEvents>("/root/EconomyEvents");
 
     }
 
@@ -74,6 +84,7 @@ public partial class ProvinceMenu : PanelContainer
     
     private void HandleBuyBuilding(string buildingId)
     {
+        GD.Print($"Attempting to buy building {buildingId} for province {_currentProvinceId}");
         if (string.IsNullOrEmpty(_currentProvinceId))
             return;
 
@@ -91,7 +102,14 @@ public partial class ProvinceMenu : PanelContainer
             return;
 
         _mainMenu.SetProvince(_currentProvinceId);
-        _buildingMenu.UpdateBuildingList();
+        _buildingMenu.UpdateBuildingList(_currentProvinceId);
+        
+        var faction = _factionService.GetFaction(province.FactionId);
+        
+        GD.Print($"Bought building {buildingId} for province {_currentProvinceId}. New balance: {faction.Coins}");
+        
+        EconomyEvents.EmitBalanceChanged(faction.Coins, province.FactionId);
+        
     }
 
     
@@ -111,6 +129,6 @@ public partial class ProvinceMenu : PanelContainer
     {
         _mainMenu.Hide();
         _buildingMenu.Show();
-        _buildingMenu.UpdateBuildingList();
+        _buildingMenu.UpdateBuildingList(_currentProvinceId);
     }
 }

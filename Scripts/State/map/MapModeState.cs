@@ -6,6 +6,7 @@ namespace Practice.Scripts.State.map;
 public partial class MapModeState : Node
 {
     
+    
     public MapMode MapMode = MapMode.Default;
     
     [Signal]

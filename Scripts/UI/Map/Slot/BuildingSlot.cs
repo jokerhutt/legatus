@@ -16,10 +16,11 @@ public partial class BuildingSlot : VBoxContainer
         Level = GetNode<Label>("%Level");
     }
     
-    public void SetData(string name, int level)
+    public void SetData(string name, int level, Texture2D iconTexture)
     {
         Name.Text = name;
         Level.Text = $"Level: {level}";
+        Icon.Texture = iconTexture;
     }
 
 
