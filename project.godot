@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameState="*res://Scripts/State/GameState.cs"
 EconomyEvents="*res://Scripts/Economy/Events/EconomyEvents.cs"
+WorldEvents="*res://Scripts/World/Events/WorldEvents.cs"
 
 [display]
 

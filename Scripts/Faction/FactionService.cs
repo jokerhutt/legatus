@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Practice.Scripts.Faction.Enum;
 using Practice.Scripts.Faction.Map;
 using Practice.Scripts.Province.Dictionary;
 using GDC = Godot.Collections;
@@ -20,6 +21,11 @@ public class FactionService
     public Model.Faction GetFaction(string factionId)
     {
         return _factionMap.Get(factionId);
+    }
+    
+    public IEnumerable<Model.Faction> GetFactions()
+    {
+        return _factionMap.GetAll();
     }
     
     public List<Province.Entity.Province> GetProvinces(string factionId)
@@ -44,7 +50,8 @@ public class FactionService
                 Id = f["id"].ToString(),
                 Name = f["name"].ToString(),
                 Coins = (int)f["coins"],
-                Color = new Godot.Color(f["color"].ToString())
+                Color = new Godot.Color(f["color"].ToString()),
+                TaxRate = TaxRate.Medium
             };
 
             _factionMap.Add(faction);

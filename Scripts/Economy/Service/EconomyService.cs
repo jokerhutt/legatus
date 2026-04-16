@@ -35,6 +35,48 @@ public class EconomyService
         return faction.Coins >= cost;
     }
     
+    public bool CanAffordProvinceUpgrade(string factionId, string provinceId)
+    {
+        var faction = _factionMap.Get(factionId);
+        var province = _provinceService.GetProvince(provinceId);
+        if (faction == null || province == null)
+            return false;
+
+        var foodCost = province.GetFoodCostForNextLevel();
+        var coinCost = province.GetCoinCostForNextLevel();
+
+        var coins = faction.Coins;
+        
+        return ((coins >= coinCost) && (province.FoodSurplus >= foodCost));
+    }
+    
+    public void UpgradeProvinceLevel(string factionId, string provinceId)
+    {
+        var faction = _factionMap.Get(factionId);
+        var province = _provinceService.GetProvince(provinceId);
+        if (faction == null || province == null)
+            return;
+
+        if (!CanAffordProvinceUpgrade(factionId, provinceId))
+            return;
+        
+        var foodCost = province.GetFoodCostForNextLevel();
+        var coinCost = province.GetCoinCostForNextLevel();
+        
+        faction.Coins -= coinCost;
+        province.FoodSurplus -= foodCost;
+        
+        _provinceService.UpgradeProvinceLevel(provinceId);
+    }
+    
+    public void ApplyIncome(string factionId, int amount)
+    {
+        var faction = _factionMap.Get(factionId);
+        if (faction == null)
+            return;
+        faction.Coins += amount;
+    }
+    
     public bool IsBuildingMaxLevel(string buildingId, int currentLevel)
     {
         var building = _buildingMap.Get(buildingId);

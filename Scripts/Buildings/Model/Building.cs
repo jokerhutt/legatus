@@ -9,6 +9,16 @@ public class Building
     public string Description;
     public List<BuildingLevel> Levels; 
     
+    public int GetFoodYieldForLevel(int level)
+    {
+        return Levels[level - 1].FoodYield;
+    }
+    
+    public int GetCoinYieldForLevel(int level)
+    {
+        return Levels[level - 1].GoldYield;
+    }
+    
     public int GetCostForLevel(int level)
     {
         return Levels[level - 1].Cost;

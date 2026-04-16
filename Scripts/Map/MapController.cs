@@ -58,7 +58,7 @@ public partial class MapController : Node2D
             {
                 var terrain = new Terrain
                 {
-                    Id = JsonUtil.GetString(t, "id"),
+                    Id = (JsonUtil.GetInt(t, "id") ?? 0).ToString(),
                     Name = JsonUtil.GetString(t, "name") ?? "Unknown",
                     IconPath = t["icon"].ToString()
                 };

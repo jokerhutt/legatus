@@ -1,5 +1,9 @@
+using System;
 using Godot;
 using Microsoft.VisualBasic;
+using Practice.Scripts.Buildings.Dictionary;
+using Practice.Scripts.Faction.Enum;
+using Practice.Scripts.Map;
 using Practice.Scripts.Province.Dictionary;
 using Practice.Scripts.Util;
 using GDC = Godot.Collections;
@@ -9,10 +13,158 @@ using Entity;
 public class ProvinceService
 {
     private ProvinceMap _provinceMap;
+    public BuildingMap _buildingMap;
+    public TerrainMap _terrainMap;
     
     public ProvinceService(ProvinceMap provinceMap)
     {
         _provinceMap = provinceMap;
+    }
+
+    public int GetFoodConsumption(string provinceId)
+    {
+        var province = GetProvince(provinceId);
+        if (province == null) return 0;
+        return province.Population / 2;
+    }
+    
+    /// <summary>
+    /// Call once per turn per province. Applies food yield, consumption, surplus, and pop growth/starvation.
+    /// </summary>
+    public void ProcessProvinceTurn(string provinceId)
+    {
+        var province = GetProvince(provinceId);
+        if (province == null) return;
+
+        var netFood = GetFoodYield(provinceId) - GetFoodConsumption(provinceId);
+        province.FoodSurplus += netFood;
+        
+        var hasStarvation = province.FoodSurplus < 0;
+        var hasSurplus = province.FoodSurplus > 0;
+
+        if (hasStarvation)
+        {
+            province.Population = Math.Max(1, province.Population + province.FoodSurplus);
+            province.FoodSurplus = 0;
+        }
+        else if (hasSurplus)
+        {
+            province.Population += province.FoodSurplus / 2;
+        }
+        
+        ProcessLoyaltyChange(provinceId, hasStarvation);
+        
+        
+    }
+    
+    
+    public void ProcessLoyaltyChange(string provinceId, bool hasStarved) 
+    {
+        var province = GetProvince(provinceId);
+        if (province == null) return;
+        
+        // Base Drift
+        var target = 50;
+        var drift = 0.05f;
+        var delta = (int)((target - province.GetHappiness()) * drift);
+        province.ChangeHappiness(delta);
+
+        // Did you feed your people
+        if (hasStarved)
+            province.ChangeHappiness(-10);
+        else
+            province.ChangeHappiness(+2);
+        
+        
+    }
+    
+    public int GetBuildingMaintenanceCost(string provinceId)
+    {
+        int cost = 0;
+        var province = GetProvince(provinceId);
+        if (province == null) return 0;
+        var buildings = province.Buildings;
+        foreach (var b in buildings)
+        {
+            var buildingData = _buildingMap.Get(b.Id);
+            if (buildingData == null) continue;
+            cost += buildingData.GetCostForLevel(b.Level);
+        }
+        return cost; 
+    }
+    
+    public int GetProvinceIncome(string provinceId, TaxRate taxRate)
+    {
+        var populationYield = GetPopulationYield(provinceId, taxRate);
+        var buildingYield = GetBuildingCoinYield(provinceId);
+        var maintenanceCost = GetBuildingMaintenanceCost(provinceId);
+        return populationYield + buildingYield - maintenanceCost;
+    }
+
+    public int GetBuildingCoinYield(string provinceId)
+    {
+        int yield = 0;
+        var province = GetProvince(provinceId);
+        if (province == null) return 0;
+        var buildings = province.Buildings;
+        foreach (var b in buildings)
+        {
+            var buildingData = _buildingMap.Get(b.Id);
+            if (buildingData == null) continue;
+            yield += buildingData.GetCoinYieldForLevel(b.Level);
+        }
+        return yield; 
+    }
+    
+    public int GetPopulationYield(string provinceId, TaxRate taxRate)
+    {
+        var province = GetProvince(provinceId);
+        if (province == null) return 0;
+
+        return province.Population * (int)taxRate;
+    }
+    
+    public int GetPopulationGrowth(string provinceId)
+    {
+        var province = GetProvince(provinceId);
+        if (province == null) return 0;
+        if (province.FoodSurplus <= 0) return 0;
+        return province.FoodSurplus / 2;
+    }
+    
+    public void UpgradeProvinceLevel(string provinceId)
+    {
+        var province = GetProvince(provinceId);
+        if (province == null) return;
+        if (!province.CanUpgradeLevel()) return;
+        province.ProvinceLevel++;
+    }
+    
+
+    public int GetFoodYield(string provinceId)
+    {
+        int yield = 0;
+        
+        var province = GetProvince(provinceId);
+        if (province == null) return 0;
+        
+        // TERRAIN YIELD
+        GD.Print($"Calculating food yield for province {provinceId} with terrain {province.TerrainId}");
+        var terrain = _terrainMap.Get(province.TerrainId);
+        if (terrain == null) return 0;
+        yield += terrain.FoodYield;
+        
+        // BUILDING YIELD
+        var buildings = province.Buildings;
+        foreach (var b in buildings)
+        {
+            var buildingData = _buildingMap.Get(b.Id);
+            if (buildingData == null) continue;
+            yield += buildingData.GetFoodYieldForLevel(b.Level);
+        }
+        
+        return yield;
+        
     }
 
     public void AddBuilding(string BuildingId, string provinceId)
@@ -50,7 +202,7 @@ public class ProvinceService
     {
         var province = GetProvince(provinceId);
         if (province == null) return false;
-        return province.Buildings.Count <= province.BuildingSlots;
+        return province.Buildings.Count <= province.ProvinceLevel;
     }
     
     public Province GetProvince(string provinceId)
@@ -64,7 +216,7 @@ public class ProvinceService
     {
         var p = new Province(id: regionName, color: new Color(regionColor));
         p.FactionId = JsonUtil.GetString(data, "ownerId");
-        p.TerrainId = JsonUtil.GetString(data, "terrainId") ?? "0";
+        p.TerrainId = (JsonUtil.GetInt(data, "terrainId") ?? 0).ToString();
         p.Population = JsonUtil.GetInt(data, "population") ?? 1;
         p.FoodSurplus = JsonUtil.GetInt(data, "food_surplus") ?? 0;
         p.SetHappiness(JsonUtil.GetInt(data, "happiness") ?? 50);

@@ -2,6 +2,7 @@ using Godot;
 using Practice.Scripts.Economy.Events;
 using Practice.Scripts.Faction;
 using Practice.Scripts.State;
+using Practice.Scripts.World.Events;
 
 namespace Practice.Scripts.UI.Map.TopBar;
 
@@ -25,6 +26,7 @@ public partial class TopBar : PanelContainer
     private string PlayerFactionId;
 
     private EconomyEvents EconomyEvents;
+    private WorldEvents WorldEvents;
     
     public override void _Ready()
     {
@@ -39,7 +41,9 @@ public partial class TopBar : PanelContainer
         SettingsButton.Pressed += OnSettingsButtonPressed;
         
         EconomyEvents = GetNode<EconomyEvents>("/root/EconomyEvents");
-        
+        WorldEvents = GetNode<WorldEvents>("/root/WorldEvents");
+
+        WorldEvents.TurnComplete += Refresh;
         EconomyEvents.BalanceChanged += OnBalanceChanged;
     }
     
@@ -49,10 +53,11 @@ public partial class TopBar : PanelContainer
         Refresh();
     }
     
-    public void Init(FactionService factionService, string playerFactionId)
+    public void Init(FactionService factionService, string playerFactionId, TurnState turnState)
     {
         _factionService = factionService;
         PlayerFactionId = playerFactionId;
+        _turnState = turnState;
         
         CoinsGroup.GetNode<TextureRect>("%Icon").Texture = CoinsTexture;
         ProvincesGroup.GetNode<TextureRect>("%Icon").Texture = ProvincesTexture;
@@ -66,6 +71,16 @@ public partial class TopBar : PanelContainer
         var faction = _factionService.GetFaction(PlayerFactionId);
         CoinsGroup.GetNode<Label>("%Label").Text = faction.Coins.ToString();
         ProvincesGroup.GetNode<Label>("%Label").Text = _factionService.GetProvinceCount(PlayerFactionId).ToString();
+        YearGroup.GetNode<Label>("%Label").Text = $"Year {FormatYear(_turnState.TurnNumber)}";
+    }
+    
+    private string FormatYear(int turnNumber)
+    {
+        int year = 450 + turnNumber;
+        if (year < 0)
+            return $"{-year} BC";
+        else
+            return $"{year} AD";
     }
     
     public void OnSettingsButtonPressed()

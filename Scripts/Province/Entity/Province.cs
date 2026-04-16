@@ -12,11 +12,11 @@ public class Province
 
     public int Population;
     public int FoodSurplus;
-
-    public int BuildingSlots;
-    
+    public int ProvinceLevel;
     private int Happiness;
     public int TaxLevel;
+
+    public int MaxLevel = 6;
 
     public List<ProvinceBuilding> Buildings = new();
     
@@ -28,18 +28,38 @@ public class Province
         Id = id;
         Color = color;
         TaxLevel = 1;
-        BuildingSlots = 4;
+        ProvinceLevel = 4;
     }
     
     public int GetHappiness()
     {
         return Happiness;
     }
+
+    public int GetFoodCostForNextLevel()
+    {
+        if (!CanUpgradeLevel())
+            return int.MaxValue;
+        return ProvinceLevel * 50;
+    }
+    
+    public int GetCoinCostForNextLevel()
+    {
+        if (!CanUpgradeLevel())
+            return int.MaxValue;
+        return ProvinceLevel * 100;
+    }
+    
+    public bool CanUpgradeLevel()
+    {
+        return ProvinceLevel < MaxLevel;
+    }
     
     public void SetHappiness(int value)
     {
         Happiness = Math.Clamp(value, 0, 100);
     }
+    
     public void ChangeHappiness(int amount)
     {
         // only between 0 and 100

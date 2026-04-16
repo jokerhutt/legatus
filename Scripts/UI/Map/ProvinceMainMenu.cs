@@ -153,7 +153,7 @@ public partial class ProvinceMainMenu : MarginContainer
             slot.OnSellBuilding = buildingId => OnSellBuilding?.Invoke(buildingId);
         }
 
-        int emptyCount = province.BuildingSlots - province.Buildings.Count;
+        int emptyCount = province.ProvinceLevel - province.Buildings.Count;
 
         if (isOwn)
         {
