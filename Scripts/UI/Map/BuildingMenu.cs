@@ -18,7 +18,7 @@ public partial class BuildingMenu : PanelContainer
 
     public System.Action OnClose;
 
-    [Export] public VBoxContainer BuildingList;
+    [Export] public GridContainer BuildingList;
     private PackedScene _buildingCardScene = GD.Load<PackedScene>("res://Scenes/UI/ShopBuildingCard.tscn");
 
     public override void _Ready()

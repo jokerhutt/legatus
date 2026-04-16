@@ -110,6 +110,8 @@ public partial class ProvinceMenu : PanelContainer
         
         EconomyEvents.EmitBalanceChanged(faction.Coins, province.FactionId);
         
+        SetModeMain();
+        
     }
 
     
