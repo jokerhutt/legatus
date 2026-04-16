@@ -7,6 +7,8 @@ public partial class ProvinceBuildingSlot : PanelContainer
     [Export] public Node Container;
     
     public System.Action OnRequestBuild;
+    public System.Action<string> OnBuyBuilding;
+    public System.Action<string> OnSellBuilding;
 
     private PackedScene _emptyScene = GD.Load<PackedScene>("res://Scenes/UI/ProvinceMenu/EmptySlot.tscn");
     private PackedScene _buildingScene = GD.Load<PackedScene>("res://Scenes/UI/ProvinceMenu/BuildingSlot.tscn");
@@ -33,14 +35,18 @@ public partial class ProvinceBuildingSlot : PanelContainer
         _current = ui;
     }
 
-    public void ShowBuilding(string id, int level, Texture2D texture)
+    public void ShowBuilding(string id, int level, Texture2D texture, bool isOwn, bool isMaxLevel, bool canAfford)
     {
         Clear();
+        
+        GD.Print("Show Building: " + id);
 
         var ui = _buildingScene.Instantiate<BuildingSlot>();
         Container.AddChild(ui);
 
-        ui.SetData(id, level, texture);
+        ui.SetData(id, level, texture, isOwn, isMaxLevel, canAfford);
+        ui.OnUpgradeClicked = buildingId => OnBuyBuilding?.Invoke(buildingId);
+        ui.OnSellClicked = buildingId => OnSellBuilding?.Invoke(buildingId);
 
         _current = ui;
     }

@@ -19,6 +19,8 @@ public partial class ProvinceMenu : PanelContainer
     private FactionService _factionService;
     private EconomyService _economyService;
     
+    private string PlayerFactionId;
+    
     private BuildingMap _buildingMap;
     private TerrainMap _terrainMap;
 
@@ -52,14 +54,17 @@ public partial class ProvinceMenu : PanelContainer
         _terrainMap = terrainMap;
         _buildingMap = buildingMap;
         
+        PlayerFactionId = playerFactionId;
 
         _selectionState = selectionState;
         _selectionState.SelectionChanged += OnSelectionChanged;
 
-        _mainMenu.Init(provinceService, factionService, terrainMap, buildingMap);
+        _mainMenu.Init(provinceService, factionService, terrainMap, buildingMap, PlayerFactionId, _economyService);
         _mainMenu.OnClose = Close;
+        _mainMenu.OnBuyBuilding = HandleBuyBuilding;
+        _mainMenu.OnSellBuilding = HandleSellBuilding;
         
-        _buildingMenu.Init(provinceService, _buildingMap, _economyService, playerFactionId);
+        _buildingMenu.Init(provinceService, _buildingMap, _economyService, PlayerFactionId);
         _buildingMenu.OnClose = SetModeMain;
         _buildingMenu.OnBuyBuilding = HandleBuyBuilding;
         
@@ -81,6 +86,38 @@ public partial class ProvinceMenu : PanelContainer
         SetModeMain();
 
         Show();
+    }
+    
+    private void HandleSellBuilding(string buildingId)
+    {
+        GD.Print($"Attempting to sell building {buildingId} for province {_currentProvinceId}");
+        if (string.IsNullOrEmpty(_currentProvinceId))
+            return;
+
+        var province = _provinceService.GetProvince(_currentProvinceId);
+        if (province == null || string.IsNullOrEmpty(province.FactionId))
+            return;
+
+        var success = _economyService.SellBuilding(
+            province.FactionId,
+            _currentProvinceId,
+            buildingId
+        );
+
+        if (!success)
+            return;
+
+        _mainMenu.SetProvince(_currentProvinceId);
+        _buildingMenu.UpdateBuildingList(_currentProvinceId);
+        
+        var faction = _factionService.GetFaction(province.FactionId);
+        
+        GD.Print($"Sold building {buildingId} for province {_currentProvinceId}. New balance: {faction.Coins}");
+        
+        EconomyEvents.EmitBalanceChanged(faction.Coins, province.FactionId);
+        
+        SetModeMain();
+        
     }
     
     private void HandleBuyBuilding(string buildingId)

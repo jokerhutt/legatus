@@ -14,6 +14,8 @@ public partial class GameState : Node
      public TerrainMap TerrainMap = new TerrainMap();
      public BuildingMap BuildingMap = new BuildingMap();
      
+     public TurnState TurnState = new TurnState();
+     
      public SelectionState SelectionState = new SelectionState();
      public MapModeState MapModeState = new MapModeState();
      public string PlayerFactionId;

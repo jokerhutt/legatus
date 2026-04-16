@@ -11,12 +11,12 @@ public class Building
     
     public int GetCostForLevel(int level)
     {
-        return Levels[level].Cost;
+        return Levels[level - 1].Cost;
     }
     
     public bool IsMaxLevel(int level)
     {
-        return level >= Levels.Count - 1;
+        return level >= Levels.Count;
     }
     
 }

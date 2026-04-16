@@ -1,17 +1,22 @@
 using Godot;
 using Practice.Scripts.Economy.Events;
 using Practice.Scripts.Faction;
+using Practice.Scripts.State;
 
 namespace Practice.Scripts.UI.Map.TopBar;
 
 public partial class TopBar : PanelContainer
 {
+    
+    private TurnState _turnState;
 
     [Export] public Texture2D CoinsTexture;
     [Export] public Texture2D ProvincesTexture;
+    [Export] public Texture2D YearTexture;
 
     private HBoxContainer CoinsGroup;
     private HBoxContainer ProvincesGroup;
+    private HBoxContainer YearGroup;
     
     private TextureButton SettingsButton;
     private TextureButton InfoButton;
@@ -25,6 +30,7 @@ public partial class TopBar : PanelContainer
     {
         CoinsGroup = GetNode<HBoxContainer>("%CoinsGroup");
         ProvincesGroup = GetNode<HBoxContainer>("%ProvincesGroup");
+        YearGroup = GetNode<HBoxContainer>("%YearGroup");
         
         SettingsButton = GetNode<TextureButton>("%SettingsButton");
         InfoButton = GetNode<TextureButton>("%InfoButton");
@@ -50,6 +56,7 @@ public partial class TopBar : PanelContainer
         
         CoinsGroup.GetNode<TextureRect>("%Icon").Texture = CoinsTexture;
         ProvincesGroup.GetNode<TextureRect>("%Icon").Texture = ProvincesTexture;
+        YearGroup.GetNode<TextureRect>("%Icon").Texture = YearTexture;
         
         Refresh();
     }

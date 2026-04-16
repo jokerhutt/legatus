@@ -21,6 +21,7 @@ public partial class Bootstrap : Node
     public override void _Ready()
     {
         _gs = GetNode<GameState>("/root/GameState");
+        _gs.PlayerFactionId = "ROM";
 
         // services
         _factionService = new FactionService(_gs.FactionMap, _gs.ProvinceMap);
@@ -34,7 +35,6 @@ public partial class Bootstrap : Node
 
         // deps
         map.Init(_gs, _provinceService, _factionService);
-        _gs.PlayerFactionId = "ROM";
         
         // UI
         menu.Init(_provinceService, _factionService, _gs.TerrainMap, _gs.SelectionState, _economyService, _gs.BuildingMap, _gs.PlayerFactionId);

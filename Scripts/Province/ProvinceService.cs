@@ -22,7 +22,28 @@ public class ProvinceService
         if (!HasBuildingSlots(provinceId)) return;
         
         province.Buildings.Add(new ProvinceBuilding(BuildingId, 1));
+    }
 
+    public void RemoveBuilding(string buildingId, string provinceId)
+    {
+        var province = GetProvince(provinceId);
+        if (province == null) return;
+        
+        var building = province.Buildings.Find(b => b.Id == buildingId);
+        if (building == null) return;
+        
+        province.Buildings.Remove(building);
+    }
+    
+    public void UpgradeBuilding(string BuildingId, string provinceId)
+    {
+        var province = GetProvince(provinceId);
+        if (province == null) return;
+        
+        var building = province.Buildings.Find(b => b.Id == BuildingId);
+        if (building == null) return;
+        
+        building.Level++;
     }
 
     public bool HasBuildingSlots(string provinceId)

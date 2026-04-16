@@ -1,4 +1,5 @@
 using System.Linq;
+using Godot;
 using Practice.Scripts.Buildings.Dictionary;
 using Practice.Scripts.Faction.Map;
 using Practice.Scripts.Province;
@@ -17,8 +18,63 @@ public class EconomyService
         _provinceService = provinceService;
         _buildingMap = buildingMap;
     }
+    
+    public bool CanAffordBuilding(string factionId, string buildingId, int level)
+    {
+        var faction = _factionMap.Get(factionId);
+        var building = _buildingMap.Get(buildingId);
 
+        GD.Print($"CHECKING AFFORDABILITY OF BUILIDNG {buildingId} for faction {factionId} at level {level}");
+        GD.Print("Checking if faction can afford building:");
+        if (faction == null || building == null)
+            return false;
+        
+
+        var cost = building.GetCostForLevel(level);
+        GD.Print($"Faction coins: {faction.Coins}, Building cost for level {level}: {cost}");
+        return faction.Coins >= cost;
+    }
+    
+    public bool IsBuildingMaxLevel(string buildingId, int currentLevel)
+    {
+        var building = _buildingMap.Get(buildingId);
+        if (building == null)
+            return true;
+
+        return building.IsMaxLevel(currentLevel);
+    }
+    
     public bool CanBuyBuilding(string factionId, string provinceId, string buildingId)
+    {
+        var faction = _factionMap.Get(factionId);
+        var province = _provinceService.GetProvince(provinceId);
+        var building = _buildingMap.Get(buildingId);
+
+        GD.Print($"Checking if faction {factionId} can buy building {buildingId} in province {provinceId}");
+        if (faction == null || province == null || building == null)
+            return false;
+        
+        GD.Print($"Faction coins: {faction.Coins}");
+
+        var existing = province.Buildings.FirstOrDefault(b => b.Id == buildingId);
+        var currentLevel = existing?.Level ?? 0;
+        
+        GD.Print($"Current level of building {buildingId} in province {provinceId}: {currentLevel}");
+
+        if (building.IsMaxLevel(currentLevel))
+        {
+            GD.Print($"Building {buildingId} is already at max level in province {provinceId}");
+            return false;
+        }
+
+            
+        var nextLevel = currentLevel + 1;
+        var buildingCost = building.GetCostForLevel(nextLevel);
+
+        return buildingCost <= faction.Coins;
+    }
+    
+    public bool SellBuilding(string factionId, string provinceId, string buildingId)
     {
         var faction = _factionMap.Get(factionId);
         var province = _provinceService.GetProvince(provinceId);
@@ -28,15 +84,16 @@ public class EconomyService
             return false;
 
         var existing = province.Buildings.FirstOrDefault(b => b.Id == buildingId);
-        var currentLevel = existing?.Level ?? 0;
-
-        if (building.IsMaxLevel(currentLevel))
+        if (existing == null)
             return false;
 
-        var nextLevel = currentLevel + 1;
-        var buildingCost = building.GetCostForLevel(nextLevel);
+        var currentLevel = existing.Level;
+        var sellPrice = building.GetCostForLevel(currentLevel) / 10;
 
-        return buildingCost <= faction.Coins;
+        faction.Coins += sellPrice;
+        _provinceService.RemoveBuilding(buildingId, provinceId);
+
+        return true;
     }
 
     public bool BuyBuilding(string factionId, string provinceId, string buildingId)
@@ -54,7 +111,11 @@ public class EconomyService
         var buildingCost = building.GetCostForLevel(nextLevel);
 
         faction.Coins -= buildingCost;
-        _provinceService.AddBuilding(buildingId, provinceId);
+        
+        if (existing == null)
+            _provinceService.AddBuilding(buildingId, provinceId);
+        else
+            _provinceService.UpgradeBuilding(buildingId, provinceId);
 
         return true;
     }
