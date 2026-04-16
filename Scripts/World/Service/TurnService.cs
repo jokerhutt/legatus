@@ -37,6 +37,12 @@ public class TurnService
         {
             ProcessFactionTurn(faction.Id);
         }
+        GD.Print($"Turn {TurnState.TurnNumber} complete");
+        TurnState.TurnNumber += 1;
+        GD.Print("================================");
+        GD.Print($"New Turn: {TurnState.TurnNumber}");
+        GD.Print("================================");
+        WorldEvents.EmitTurnComplete();
     }
     
     public void ProcessFactionTurn(string factionId)
@@ -58,12 +64,7 @@ public class TurnService
 
         }
 
-        GD.Print($"Turn {TurnState.TurnNumber} complete");
-        TurnState.TurnNumber += 1;
-        GD.Print("================================");
-        GD.Print($"New Turn: {TurnState.TurnNumber}");
-        GD.Print("================================");
-        WorldEvents.EmitTurnComplete();
+
     }
     
 }

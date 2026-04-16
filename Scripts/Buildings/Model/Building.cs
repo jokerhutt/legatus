@@ -24,6 +24,11 @@ public class Building
         return Levels[level - 1].Cost;
     }
     
+    public int GetMaintenanceCostForLevel(int level)
+    {
+        return Levels[level - 1].Maintenance;
+    }
+    
     public bool IsMaxLevel(int level)
     {
         return level >= Levels.Count;

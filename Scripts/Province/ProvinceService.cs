@@ -88,7 +88,7 @@ public class ProvinceService
         {
             var buildingData = _buildingMap.Get(b.Id);
             if (buildingData == null) continue;
-            cost += buildingData.GetCostForLevel(b.Level);
+            cost += buildingData.GetMaintenanceCostForLevel(b.Level);
         }
         return cost; 
     }
@@ -98,7 +98,9 @@ public class ProvinceService
         var populationYield = GetPopulationYield(provinceId, taxRate);
         var buildingYield = GetBuildingCoinYield(provinceId);
         var maintenanceCost = GetBuildingMaintenanceCost(provinceId);
-        return populationYield + buildingYield - maintenanceCost;
+        var net = populationYield + buildingYield - maintenanceCost;
+        GD.Print($"{provinceId}:  POP YIELD: {populationYield}, BUILDING YIELD: {buildingYield}, MAINTENANCE COST: {maintenanceCost}, NET INCOME: {net}");
+        return net;
     }
 
     public int GetBuildingCoinYield(string provinceId)
