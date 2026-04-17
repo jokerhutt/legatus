@@ -1,6 +1,7 @@
 using System.Linq;
 using Godot;
 using Practice.Scripts.Buildings.Dictionary;
+using Practice.Scripts.Economy.Events;
 using Practice.Scripts.Faction.Map;
 using Practice.Scripts.Province;
 
@@ -11,12 +12,29 @@ public class EconomyService
     private readonly FactionMap _factionMap;
     private readonly ProvinceService _provinceService;
     private readonly BuildingMap _buildingMap;
+    private EconomyEvents _economyEvents;
 
-    public EconomyService(FactionMap factionMap, ProvinceService provinceService, BuildingMap buildingMap)
+    public EconomyService(FactionMap factionMap, ProvinceService provinceService, BuildingMap buildingMap, EconomyEvents economyEvents)
     {
         _factionMap = factionMap;
         _provinceService = provinceService;
         _buildingMap = buildingMap;
+        _economyEvents = economyEvents;
+    }
+    
+    public void TransactCoins(string senderFactionId, string receiverFactionId, int amount)
+    {
+        var sender = _factionMap.Get(senderFactionId);
+        var receiver = _factionMap.Get(receiverFactionId);
+        if (sender == null || receiver == null)
+            return;
+
+        if (sender.Coins < amount)
+            return;
+
+        sender.Coins -= amount;
+        receiver.Coins += amount;
+        _economyEvents.EmitBalanceChanged(sender.Coins, senderFactionId);
     }
     
     public bool CanAffordBuilding(string factionId, string buildingId, int level)

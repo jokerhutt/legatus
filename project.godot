@@ -24,6 +24,7 @@ general/name="Practice"
 GameState="*res://Scripts/State/GameState.cs"
 EconomyEvents="*res://Scripts/Economy/Events/EconomyEvents.cs"
 WorldEvents="*res://Scripts/World/Events/WorldEvents.cs"
+DiplomacyEvents="*res://Scripts/Diplomacy/Events/DiplomacyEvents.cs"
 
 [display]
 
@@ -39,7 +40,7 @@ project/assembly_name="Practice"
 [file_customization]
 
 folder_colors={
-"res://data/": "blue",
+"res://data/": "pink",
 "res://map/": "orange",
 "res://ui/": "green"
 }

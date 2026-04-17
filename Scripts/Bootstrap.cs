@@ -1,6 +1,8 @@
 using Practice.Scripts.Diplomacy;
 using Practice.Scripts.Diplomacy.Controller;
+using Practice.Scripts.Diplomacy.Events;
 using Practice.Scripts.Economy;
+using Practice.Scripts.Economy.Events;
 using Practice.Scripts.Faction;
 using Practice.Scripts.Map;
 using Practice.Scripts.UI.Map;
@@ -32,16 +34,18 @@ public partial class Bootstrap : Node
         _gs.PlayerFactionId = "ROM";
         
         var worldEvents = GetNode<WorldEvents>("/root/WorldEvents");
+        var diplomacyEvents = GetNode<DiplomacyEvents>("/root/DiplomacyEvents");  
+        var economyEvents = GetNode<EconomyEvents>("/root/EconomyEvents");
 
         // services
         _factionService = new FactionService(_gs.FactionMap, _gs.ProvinceMap);
         _provinceService = new ProvinceService(_gs.ProvinceMap);
         _provinceService._buildingMap = _gs.BuildingMap;
         _provinceService._terrainMap = _gs.TerrainMap;
-        _economyService = new EconomyService(_gs.FactionMap, _provinceService, _gs.BuildingMap);
+        _economyService = new EconomyService(_gs.FactionMap, _provinceService, _gs.BuildingMap, economyEvents);
         _turnService = new TurnService(worldEvents, _gs.TurnState, _economyService, _provinceService, _factionService, _gs.PlayerFactionId);
         
-        _diplomacyController = new DiplomacyController(_factionService);
+        _diplomacyController = new DiplomacyController(_factionService, _economyService, diplomacyEvents, _gs.Treaties);
 
         // systems
         var map = GetNode<MapController>("MapController");

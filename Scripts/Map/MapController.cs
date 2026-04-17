@@ -1,5 +1,8 @@
+using System;
 using Godot;
 using Practice.Scripts.Buildings.Model;
+using Practice.Scripts.Diplomacy.Model;
+using Practice.Scripts.Diplomacy.Model.Enum;
 using Practice.Scripts.Faction;
 using Practice.Scripts.Province;
 using Practice.Scripts.State;
@@ -45,6 +48,7 @@ public partial class MapController : Node2D
         InitializeProvinceMap(scale);
         InitializeBuildingMap(FSUtil.LoadJson(BuildingDataPath));
         InitializeTerrainMap(FSUtil.LoadJson(TerrainDataPath));
+        InitializeTreaties(FSUtil.LoadJson(FactionDataPath));
         
         fs.InitializeFactions(FSUtil.LoadJson(FactionDataPath));
     }
@@ -64,6 +68,23 @@ public partial class MapController : Node2D
                 };
                 terrainMap.Add(terrain.Id, terrain);
             }
+    }
+    
+    private void InitializeTreaties(GDC.Dictionary data)
+    {
+        var treaties = GameState.Treaties;
+        var treatyList = (GDC.Array)data["treaties"];
+        foreach (GDC.Dictionary t in treatyList)
+        {
+            var treaty = new Treaty
+            {
+                A = t["a"].ToString(),
+                B = t["b"].ToString(),
+                Type = Enum.Parse<TreatyType>(t["type"].ToString()),
+                Duration = (int)t["duration"]
+            };
+            treaties.Add(treaty);
+        }
     }
 
     private void InitializeBuildingMap(GDC.Dictionary data)

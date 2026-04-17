@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using Godot;
 using Practice.Scripts.Buildings.Dictionary;
+using Practice.Scripts.Diplomacy.Model;
 using Practice.Scripts.Faction.Map;
 using Practice.Scripts.Map;
 using Practice.Scripts.Province.Dictionary;
@@ -13,6 +15,8 @@ public partial class GameState : Node
      public FactionMap FactionMap = new FactionMap();
      public TerrainMap TerrainMap = new TerrainMap();
      public BuildingMap BuildingMap = new BuildingMap();
+     
+     public List<Treaty> Treaties = new List<Treaty>();
      
      public TurnState TurnState = new TurnState();
      
