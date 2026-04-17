@@ -76,7 +76,7 @@ public partial class TopBar : PanelContainer
     
     private string FormatYear(int turnNumber)
     {
-        int year = 450 + turnNumber;
+        int year = -450 + turnNumber;
         if (year < 0)
             return $"{-year} BC";
         else

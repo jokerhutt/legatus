@@ -56,6 +56,38 @@ public class FactionService
 
             _factionMap.Add(faction);
         }
+        
+        InitializeOpinions(factionList);
+    }
+    
+    private void InitializeOpinions(GDC.Array factionList)
+    {
+        var allFactions = _factionMap.GetAll().ToList();
+
+        foreach (GDC.Dictionary f in factionList)
+        {
+            var factionId = f["id"].ToString();
+            var faction = _factionMap.Get(factionId);
+
+            GDC.Dictionary jsonOpinions = null;
+            if (f.ContainsKey("opinions"))
+                jsonOpinions = (GDC.Dictionary)f["opinions"];
+
+            foreach (var other in allFactions)
+            {
+                if (other.Id == factionId)
+                    continue;
+
+                int value = 10;
+
+                if (jsonOpinions != null && jsonOpinions.ContainsKey(other.Id))
+                {
+                    value = (int)jsonOpinions[other.Id];
+                }
+
+                faction.Opinions[other.Id] = value;
+            }
+        }
     }
     
     

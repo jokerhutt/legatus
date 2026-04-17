@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Practice.Scripts.Faction.Enum;
 
 namespace Practice.Scripts.Faction.Model;
@@ -10,4 +11,7 @@ public class Faction
     public Color Color;
     public int Coins;
     public TaxRate TaxRate;
+    
+    public Dictionary<string, int> Opinions = new();
+    
 }
