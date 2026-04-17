@@ -103,13 +103,40 @@ public class DiplomacyService
     
     public void DeclareWar(string factionAId, string factionBId)
     {
+        if (!CanDeclareWar(factionAId, factionBId))
+            return;
         CreateTreaty(factionAId, factionBId, TreatyType.War);
+    }
+    
+    public bool CanDeclareWar(string factionAId, string factionBId)
+    {
+        if (HasTreatyType(factionAId, factionBId, TreatyType.Alliance))
+            return false;
+        if (HasTreatyType(factionAId, factionBId, TreatyType.War))
+            return false;
+        if (HasTreatyType(factionAId, factionBId, TreatyType.NonAggression))
+            return false;
+        return true;
+    }
+    
+    public bool HasTreatyType(string factionAId, string factionBId, TreatyType type)
+    {
+        return _treaties.Exists(t =>
+            ((t.A == factionAId && t.B == factionBId) ||
+             (t.A == factionBId && t.B == factionAId)) &&
+            t.Type == type);
     }
     
     public void FormAlliance(string factionAId, string factionBId)
     {
         CreateTreaty(factionAId, factionBId, TreatyType.Alliance);
     }
+    
+    public void CancelAlliance(string factionAId, string factionBId)
+    {
+        CancelTreaty(factionAId, factionBId, TreatyType.Alliance);
+    }
+    
     
     public void UpdateOpinion(string fromFactionId, string toFactionId, int amount)
     {

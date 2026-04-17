@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Godot;
 using Practice.Scripts.Faction.Enum;
 using Practice.Scripts.Faction.Map;
 using Practice.Scripts.Province.Dictionary;
@@ -43,15 +44,35 @@ public class FactionService
     public void InitializeFactions(GDC.Dictionary data)
     {
         var factionList = (GDC.Array)data["factions"];
+
         foreach (GDC.Dictionary f in factionList)
         {
+            var id = f["id"].ToString();
+            var basePath = $"res://assets/crest/{id}";
+
+            Texture2D texture =
+                GD.Load<Texture2D>(basePath + ".png") ??
+                GD.Load<Texture2D>(basePath + ".jpg") ??
+                GD.Load<Texture2D>(basePath + ".jpeg");
+
+            if (texture == null)
+            {
+                GD.PushWarning($"Missing crest for {id}, using default");
+                texture = GD.Load<Texture2D>("res://assets/crest/default.png");
+            }
+
+            if (texture == null)
+            {
+                GD.PushWarning($"Missing crest for faction {id}: {basePath}");
+            }
             var faction = new Model.Faction
             {
-                Id = f["id"].ToString(),
+                Id = id,
                 Name = f["name"].ToString(),
                 Coins = (int)f["coins"],
                 Color = new Godot.Color(f["color"].ToString()),
-                TaxRate = TaxRate.Medium
+                TaxRate = TaxRate.Medium,
+                Crest = texture
             };
 
             _factionMap.Add(faction);

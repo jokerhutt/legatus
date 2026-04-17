@@ -268,52 +268,67 @@ theme_override_constants/separation = 4
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.65, 0.13, 1)
 theme_override_font_sizes/font_size = 16
-text = "Actions"
+text = "War & Peace"
 
-[node name="Row1" type="HBoxContainer" parent="Scroll/Margin/VBox/ActionsSection"]
+[node name="WarPeaceRow" type="HBoxContainer" parent="Scroll/Margin/VBox/ActionsSection"]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="DeclareWarBtn" type="Button" parent="Scroll/Margin/VBox/ActionsSection/Row1"]
+[node name="DeclareWarBtn" type="Button" parent="Scroll/Margin/VBox/ActionsSection/WarPeaceRow"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Declare War"
 
-[node name="ProposePeaceBtn" type="Button" parent="Scroll/Margin/VBox/ActionsSection/Row1"]
+[node name="MakePeaceBtn" type="Button" parent="Scroll/Margin/VBox/ActionsSection/WarPeaceRow"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Propose Peace"
+text = "Make Peace"
 
-[node name="Row2" type="HBoxContainer" parent="Scroll/Margin/VBox/ActionsSection"]
+[node name="PactsDivider" type="HSeparator" parent="Scroll/Margin/VBox"]
+layout_mode = 2
+
+[node name="PactsSection" type="VBoxContainer" parent="Scroll/Margin/VBox"]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="SendGiftBtn" type="Button" parent="Scroll/Margin/VBox/ActionsSection/Row2"]
-unique_name_in_owner = true
+[node name="PactsTitle" type="Label" parent="Scroll/Margin/VBox/PactsSection"]
 layout_mode = 2
-size_flags_horizontal = 3
-text = "Send Gift"
+theme_override_colors/font_color = Color(0.85, 0.65, 0.13, 1)
+theme_override_font_sizes/font_size = 16
+text = "Pacts & Alliances"
 
-[node name="ProposeAllianceBtn" type="Button" parent="Scroll/Margin/VBox/ActionsSection/Row2"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Propose Alliance"
-
-[node name="Row3" type="HBoxContainer" parent="Scroll/Margin/VBox/ActionsSection"]
+[node name="PactsRow" type="HBoxContainer" parent="Scroll/Margin/VBox/PactsSection"]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="TradeAgreementBtn" type="Button" parent="Scroll/Margin/VBox/ActionsSection/Row3"]
+[node name="NonAggressionBtn" type="Button" parent="Scroll/Margin/VBox/PactsSection/PactsRow"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Trade Agreement"
+text = "Sign Non-Aggression"
 
-[node name="InsultBtn" type="Button" parent="Scroll/Margin/VBox/ActionsSection/Row3"]
+[node name="AllianceBtn" type="Button" parent="Scroll/Margin/VBox/PactsSection/PactsRow"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Insult"
+text = "Form Alliance"
+
+[node name="GiftDivider" type="HSeparator" parent="Scroll/Margin/VBox"]
+layout_mode = 2
+
+[node name="GiftSection" type="VBoxContainer" parent="Scroll/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="GiftTitle" type="Label" parent="Scroll/Margin/VBox/GiftSection"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.65, 0.13, 1)
+theme_override_font_sizes/font_size = 16
+text = "Gifts"
+
+[node name="SendGiftBtn" type="Button" parent="Scroll/Margin/VBox/GiftSection"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Send Gift (50 coins)"

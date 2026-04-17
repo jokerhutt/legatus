@@ -9,6 +9,7 @@ public class Faction
     public string Id;
     public string Name;
     public Color Color;
+    public Texture2D Crest;
     public int Coins;
     public TaxRate TaxRate;
     
