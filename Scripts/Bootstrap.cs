@@ -1,3 +1,5 @@
+using Practice.Scripts.Diplomacy;
+using Practice.Scripts.Diplomacy.Controller;
 using Practice.Scripts.Economy;
 using Practice.Scripts.Faction;
 using Practice.Scripts.Map;
@@ -21,6 +23,8 @@ public partial class Bootstrap : Node
     private FactionService _factionService;
     private EconomyService _economyService;
     private TurnService _turnService;
+    private DiplomacyService _diplomacyService;
+    private DiplomacyController _diplomacyController;
 
     public override void _Ready()
     {
@@ -36,11 +40,14 @@ public partial class Bootstrap : Node
         _provinceService._terrainMap = _gs.TerrainMap;
         _economyService = new EconomyService(_gs.FactionMap, _provinceService, _gs.BuildingMap);
         _turnService = new TurnService(worldEvents, _gs.TurnState, _economyService, _provinceService, _factionService, _gs.PlayerFactionId);
+        
+        _diplomacyController = new DiplomacyController(_factionService);
 
         // systems
         var map = GetNode<MapController>("MapController");
         var menu = GetNode<ProvinceMenu>("CanvasLayer/ProvinceMenu");
         var topBar = GetNode<TopBar>("CanvasLayer/TopBar");
+        var diplomacyView = GetNode<DiplomacyView>("CanvasLayer/DiplomacyView");
 
         // deps
         map.Init(_gs, _provinceService, _factionService);
@@ -48,6 +55,8 @@ public partial class Bootstrap : Node
         // UI
         menu.Init(_provinceService, _factionService, _gs.TerrainMap, _gs.SelectionState, _economyService, _gs.BuildingMap, _gs.PlayerFactionId);
         topBar.Init(_factionService, _gs.PlayerFactionId, _gs.TurnState);
+        diplomacyView.Init(_diplomacyController, _gs.PlayerFactionId);
+        
 
 
     }

@@ -1,4 +1,5 @@
 using Godot;
+using Practice.Scripts.Diplomacy;
 using Practice.Scripts.State;
 
 namespace Practice.Scripts.UI.Map;
@@ -15,4 +16,6 @@ public partial class SidePanel : VBoxContainer
         var diplomacyTab = GetNode<Button>("DiplomacyTab");
         diplomacyTab.Pressed += () => _selectionState.ToggleDiplomacyView();
     }
+    
+    
 }
