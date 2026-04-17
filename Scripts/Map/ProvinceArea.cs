@@ -40,9 +40,21 @@ public partial class ProvinceArea : Area2D
         {
             GD.Print($"Clicked on province {ProvinceId}");
             SelectionState.SelectProvince(ProvinceId);
+            return;
+        }
+
+        if (@event is InputEventMouseButton mb2 && mb2.ButtonIndex == MouseButton.Right && mb2.Pressed)
+        {
+            GD.Print($"Right-clicked on province {ProvinceId}");
+            var province = ProvinceMap.Get(ProvinceId);
+            GD.Print($"Province {ProvinceId} belongs to faction {province.FactionId}");
+            if (province.FactionId == null) return;
+            GD.Print($"Selecting faction {province.FactionId} from province {ProvinceId}");
+            SelectionState.SelectFaction(province.FactionId);
+            return;
         }
     }
-    
+
     private void OnMapModeChanged(int mode)
     {
         SetProvinceColors((MapMode)mode);

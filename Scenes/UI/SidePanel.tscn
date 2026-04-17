@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0cn5gh3jpwwl"]
+
+[ext_resource type="Theme" uid="uid://dy1b0auwkyjnb" path="res://ui/ui_theme.tres" id="1_theme"]
+[ext_resource type="Script" uid="uid://en2q7qxs5ntg" path="res://Scripts/UI/Map/SidePanel.cs" id="2_script"]
+
+[node name="SidePanel" type="VBoxContainer"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -200.0
+offset_bottom = 200.0
+grow_horizontal = 0
+grow_vertical = 2
+custom_minimum_size = Vector2(40, 0)
+theme = ExtResource("1_theme")
+theme_override_constants/separation = 4
+script = ExtResource("2_script")
+
+[node name="DiplomacyTab" type="Button" parent="."]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+tooltip_text = "Diplomacy"
+text = "D"

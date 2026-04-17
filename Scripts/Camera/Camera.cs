@@ -38,7 +38,7 @@ public partial class Camera : Camera2D
         );
     }
 
-    public override void _Input(InputEvent @event)
+    public override void _UnhandledInput(InputEvent @event)
     {
         HandleZoom(@event);
         HandlePan(@event);

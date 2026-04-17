@@ -10,10 +10,14 @@ config_version=5
 
 [application]
 
-config/name="Practice"
+config/name="Legatus"
 run/main_scene="uid://b7cde2c8bu2b1"
 config/features=PackedStringArray("4.5", "C#", "Forward Plus")
 config/icon="res://icon.svg"
+
+[audio]
+
+general/name="Practice"
 
 [autoload]
 

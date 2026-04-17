@@ -11,6 +11,7 @@ public partial class WorldEvents : Node
     [Signal]
     public delegate void TurnCompleteEventHandler();
     
+    
     public void EmitTurnEnd()
     {
         GD.Print("Emitting TurnEnd event");

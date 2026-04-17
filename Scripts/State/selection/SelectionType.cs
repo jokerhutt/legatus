@@ -4,5 +4,6 @@ public enum SelectionType
 {
     None,
     Army,
-    Province
+    Province,
+    Diplomacy,
 }

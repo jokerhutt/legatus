@@ -1,0 +1,354 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Theme" uid="uid://dy1b0auwkyjnb" path="res://ui/ui_theme.tres" id="1_theme"]
+[ext_resource type="Script" path="res://Scripts/UI/Map/DiplomacyView.cs" id="2_script"]
+
+[node name="DiplomacyView" type="PanelContainer"]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -700.0
+offset_right = 780.0
+grow_vertical = 0
+mouse_filter = 0
+theme = ExtResource("1_theme")
+script = ExtResource("2_script")
+
+[node name="Scroll" type="ScrollContainer" parent="."]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="Margin" type="MarginContainer" parent="Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 8
+
+[node name="VBox" type="VBoxContainer" parent="Scroll/Margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="HeaderRow" type="HBoxContainer" parent="Scroll/Margin/VBox"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Scroll/Margin/VBox/HeaderRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.85, 0.65, 0.13, 1)
+theme_override_font_sizes/font_size = 24
+text = "Diplomacy"
+
+[node name="CloseButton" type="Button" parent="Scroll/Margin/VBox/HeaderRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "✕"
+
+[node name="HeaderDivider" type="HSeparator" parent="Scroll/Margin/VBox"]
+layout_mode = 2
+
+;; ── Factions header: You vs Them ──
+
+[node name="FactionHeader" type="HBoxContainer" parent="Scroll/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="YourFaction" type="VBoxContainer" parent="Scroll/Margin/VBox/FactionHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="YourCrest" type="TextureRect" parent="Scroll/Margin/VBox/FactionHeader/YourFaction"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+expand_mode = 1
+stretch_mode = 5
+
+[node name="YourName" type="Label" parent="Scroll/Margin/VBox/FactionHeader/YourFaction"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.65, 0.13, 1)
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+text = "Rome"
+
+[node name="VsLabel" type="Label" parent="Scroll/Margin/VBox/FactionHeader"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 16
+text = "⚔"
+
+[node name="TheirFaction" type="VBoxContainer" parent="Scroll/Margin/VBox/FactionHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TheirCrest" type="TextureRect" parent="Scroll/Margin/VBox/FactionHeader/TheirFaction"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TheirName" type="Label" parent="Scroll/Margin/VBox/FactionHeader/TheirFaction"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.65, 0.13, 1)
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+text = "Etruscans"
+
+[node name="FactionDivider" type="HSeparator" parent="Scroll/Margin/VBox"]
+layout_mode = 2
+
+;; ── Relationship Status ──
+
+[node name="StatusSection" type="VBoxContainer" parent="Scroll/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="StatusTitle" type="Label" parent="Scroll/Margin/VBox/StatusSection"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.65, 0.13, 1)
+theme_override_font_sizes/font_size = 16
+text = "Relationship"
+
+[node name="StatusRow" type="HBoxContainer" parent="Scroll/Margin/VBox/StatusSection"]
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="Scroll/Margin/VBox/StatusSection/StatusRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Peace"
+
+[node name="Spacer" type="Control" parent="Scroll/Margin/VBox/StatusSection/StatusRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StatusIcon" type="Label" parent="Scroll/Margin/VBox/StatusSection/StatusRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "🕊️"
+
+[node name="StatusDivider" type="HSeparator" parent="Scroll/Margin/VBox"]
+layout_mode = 2
+
+;; ── Opinion ──
+
+[node name="OpinionSection" type="VBoxContainer" parent="Scroll/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="OpinionTitle" type="Label" parent="Scroll/Margin/VBox/OpinionSection"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.65, 0.13, 1)
+theme_override_font_sizes/font_size = 16
+text = "Opinion"
+
+[node name="TheirOpinionRow" type="HBoxContainer" parent="Scroll/Margin/VBox/OpinionSection"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Scroll/Margin/VBox/OpinionSection/TheirOpinionRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Their opinion of you:"
+
+[node name="Spacer" type="Control" parent="Scroll/Margin/VBox/OpinionSection/TheirOpinionRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TheirOpinionValue" type="Label" parent="Scroll/Margin/VBox/OpinionSection/TheirOpinionRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.56, 0.2, 1)
+theme_override_font_sizes/font_size = 15
+text = "+25"
+
+[node name="YourOpinionRow" type="HBoxContainer" parent="Scroll/Margin/VBox/OpinionSection"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Scroll/Margin/VBox/OpinionSection/YourOpinionRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Your opinion of them:"
+
+[node name="Spacer" type="Control" parent="Scroll/Margin/VBox/OpinionSection/YourOpinionRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="YourOpinionValue" type="Label" parent="Scroll/Margin/VBox/OpinionSection/YourOpinionRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.56, 0.2, 1)
+theme_override_font_sizes/font_size = 15
+text = "+10"
+
+[node name="ModifiersLabel" type="Label" parent="Scroll/Margin/VBox/OpinionSection"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 14
+text = "Modifiers:"
+
+[node name="ModifiersList" type="VBoxContainer" parent="Scroll/Margin/VBox/OpinionSection"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Modifier1" type="HBoxContainer" parent="Scroll/Margin/VBox/OpinionSection/ModifiersList"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="Scroll/Margin/VBox/OpinionSection/ModifiersList/Modifier1"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "  Same culture"
+
+[node name="Spacer" type="Control" parent="Scroll/Margin/VBox/OpinionSection/ModifiersList/Modifier1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Value" type="Label" parent="Scroll/Margin/VBox/OpinionSection/ModifiersList/Modifier1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.56, 0.2, 1)
+theme_override_font_sizes/font_size = 14
+text = "+15"
+
+[node name="Modifier2" type="HBoxContainer" parent="Scroll/Margin/VBox/OpinionSection/ModifiersList"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="Scroll/Margin/VBox/OpinionSection/ModifiersList/Modifier2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "  Border tension"
+
+[node name="Spacer" type="Control" parent="Scroll/Margin/VBox/OpinionSection/ModifiersList/Modifier2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Value" type="Label" parent="Scroll/Margin/VBox/OpinionSection/ModifiersList/Modifier2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.16, 0.13, 1)
+theme_override_font_sizes/font_size = 14
+text = "-10"
+
+[node name="OpinionDivider" type="HSeparator" parent="Scroll/Margin/VBox"]
+layout_mode = 2
+
+;; ── Treaties ──
+
+[node name="TreatySection" type="VBoxContainer" parent="Scroll/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TreatyTitle" type="Label" parent="Scroll/Margin/VBox/TreatySection"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.65, 0.13, 1)
+theme_override_font_sizes/font_size = 16
+text = "Treaties & Agreements"
+
+[node name="TreatiesList" type="VBoxContainer" parent="Scroll/Margin/VBox/TreatySection"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Treaty1" type="HBoxContainer" parent="Scroll/Margin/VBox/TreatySection/TreatiesList"]
+layout_mode = 2
+
+[node name="Icon" type="Label" parent="Scroll/Margin/VBox/TreatySection/TreatiesList/Treaty1"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "📜"
+
+[node name="Name" type="Label" parent="Scroll/Margin/VBox/TreatySection/TreatiesList/Treaty1"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Non-Aggression Pact"
+
+[node name="Spacer" type="Control" parent="Scroll/Margin/VBox/TreatySection/TreatiesList/Treaty1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Duration" type="Label" parent="Scroll/Margin/VBox/TreatySection/TreatiesList/Treaty1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 13
+text = "3 turns left"
+
+[node name="NoTreatiesLabel" type="Label" parent="Scroll/Margin/VBox/TreatySection"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
+theme_override_font_sizes/font_size = 14
+text = "No active treaties"
+
+[node name="TreatyDivider" type="HSeparator" parent="Scroll/Margin/VBox"]
+layout_mode = 2
+
+;; ── Actions ──
+
+[node name="ActionsSection" type="VBoxContainer" parent="Scroll/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ActionsTitle" type="Label" parent="Scroll/Margin/VBox/ActionsSection"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.65, 0.13, 1)
+theme_override_font_sizes/font_size = 16
+text = "Actions"
+
+[node name="Row1" type="HBoxContainer" parent="Scroll/Margin/VBox/ActionsSection"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="DeclareWarBtn" type="Button" parent="Scroll/Margin/VBox/ActionsSection/Row1"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Declare War"
+
+[node name="ProposePeaceBtn" type="Button" parent="Scroll/Margin/VBox/ActionsSection/Row1"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Propose Peace"
+
+[node name="Row2" type="HBoxContainer" parent="Scroll/Margin/VBox/ActionsSection"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="SendGiftBtn" type="Button" parent="Scroll/Margin/VBox/ActionsSection/Row2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Send Gift"
+
+[node name="ProposeAllianceBtn" type="Button" parent="Scroll/Margin/VBox/ActionsSection/Row2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Propose Alliance"
+
+[node name="Row3" type="HBoxContainer" parent="Scroll/Margin/VBox/ActionsSection"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TradeAgreementBtn" type="Button" parent="Scroll/Margin/VBox/ActionsSection/Row3"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Trade Agreement"
+
+[node name="InsultBtn" type="Button" parent="Scroll/Margin/VBox/ActionsSection/Row3"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Insult"
