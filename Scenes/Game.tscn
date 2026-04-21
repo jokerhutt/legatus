@@ -67,5 +67,6 @@ offset_top = -350.0
 [node name="GameActionsMenu" parent="CanvasLayer" instance=ExtResource("11_dahhg")]
 
 [node name="SidePanel" parent="CanvasLayer" instance=ExtResource("12_3so38")]
+visible = false
 
 [node name="DiplomacyView" parent="CanvasLayer" instance=ExtResource("13_3cx6b")]

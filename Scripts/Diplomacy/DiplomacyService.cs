@@ -4,7 +4,7 @@ using Legatus.Scripts.Diplomacy.Model.Enum;
 using Legatus.Scripts.Diplomacy.Views;
 using Legatus.Scripts.Faction;
 
-namespace Legatus.Scripts.Diplomacy;
+namespace Practice.Scripts.Diplomacy;
 
 public class DiplomacyService
 {

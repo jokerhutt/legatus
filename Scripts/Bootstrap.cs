@@ -1,6 +1,4 @@
 using Legatus.Scripts.Diplomacy;
-using Legatus.Scripts.Diplomacy.Controller;
-using Legatus.Scripts.Diplomacy.Events;
 using Legatus.Scripts.Economy;
 using Legatus.Scripts.Economy.Events;
 using Legatus.Scripts.Faction;
@@ -10,6 +8,9 @@ using Legatus.Scripts.UI.Map.TopBar;
 using Legatus.Scripts.World.Events;
 using Legatus.Scripts.World.Service;
 using Legatus.Scripts.UI.Map.WorldActions;
+using Practice.Scripts.Diplomacy;
+using Practice.Scripts.Diplomacy.Controller;
+using Practice.Scripts.Diplomacy.Events;
 
 namespace Legatus.Scripts;
 

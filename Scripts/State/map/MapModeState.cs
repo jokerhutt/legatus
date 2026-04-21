@@ -16,6 +16,7 @@ public partial class MapModeState : Node
     {
         GD.Print("Toggle Map Mode");
         int next = ((int)MapMode + 1) % Enum.GetValues(typeof(MapMode)).Length;
+        GD.Print("Next Map Mode: " + (MapMode)next);
         SetMapMode((MapMode)next);
     }
     

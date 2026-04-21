@@ -49,7 +49,7 @@ public partial class MapController : Node2D
         InitializeBuildingMap(FSUtil.LoadJson(BuildingDataPath));
         InitializeTerrainMap(FSUtil.LoadJson(TerrainDataPath));
         InitializeTreaties(FSUtil.LoadJson(FactionDataPath));
-        
+
         fs.InitializeFactions(FSUtil.LoadJson(FactionDataPath));
     }
     
@@ -149,7 +149,7 @@ public partial class MapController : Node2D
             string provinceName = provincesMetadataDict[provinceColor].ToString().Trim().ToLower();
             
              provinceArea.ProvinceId = provinceName;
-             provinceArea.Name = provinceColor;
+             provinceArea.Name = provinceName;
 
             Color color = new Color("#aaaaaa");
              provinceArea.BaseColor = color;
@@ -164,6 +164,7 @@ public partial class MapController : Node2D
 
             var polygons = PolygonUtil.GetPolygons(image, provinceColor, pixelColorDict);
              provinceArea.BuildGeometry(polygons, color);
+             GD.Print($"{provinceName} polygons: {polygons.Length}");
         }
 
         Provinces.Scale = mapScale;

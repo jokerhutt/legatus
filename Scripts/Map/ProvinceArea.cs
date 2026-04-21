@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Godot;
+using Legatus.Scripts.Faction.Map;
 using Legatus.Scripts.Province.Dictionary;
 using Legatus.Scripts.State;
 using Legatus.Scripts.State.map;
@@ -14,6 +15,7 @@ public partial class ProvinceArea : Area2D
     [Export] public Color SelectedColor = new Color(1, 1, 0.5f, 0.8f);
     
     private ProvinceMap ProvinceMap;
+    private FactionMap FactionMap;
 
     private SelectionState SelectionState;
     private MapModeState MapModeState;
@@ -25,6 +27,7 @@ public partial class ProvinceArea : Area2D
     {
         var _gameState = GetNode<GameState>("/root/GameState");
         SelectionState = _gameState.SelectionState;
+        FactionMap = _gameState.FactionMap;
         ProvinceMap = _gameState.ProvinceMap;
         SelectionState.SelectionChanged += OnSelectionChanged;
         MapModeState = _gameState.MapModeState;
@@ -57,6 +60,7 @@ public partial class ProvinceArea : Area2D
 
     private void OnMapModeChanged(int mode)
     {
+        GD.Print($"Map mode changed to {(MapMode)mode}, updating province colors of {ProvinceId}");
         SetProvinceColors((MapMode)mode);
         UpdateVisual();
     }
@@ -94,9 +98,35 @@ public partial class ProvinceArea : Area2D
                 SelectedColor = new Color(1, 1, 0.5f, 0.8f);
                 break;
             case MapMode.Faction:
-                BaseColor = new Color(0.4f, 0.6f, 0.2f, 0.5f);
+
+                GD.Print("TRYING TO SET FACTION COLOR FOR PROVINCE " + ProvinceId);
+
+                if (Province == null || string.IsNullOrEmpty(Province.FactionId))
+
+                {
+
+                    GD.Print($"Province {ProvinceId} has no faction, using neutral color");
+
+                    BaseColor = new Color(0.3f, 0.3f, 0.3f, 0.5f);
+
+                    HoverColor = new Color(0.6f, 0.4f, 0.2f, 0.8f);
+
+                    SelectedColor = new Color(0.8f, 0.6f, 0.4f, 0.8f);
+
+                    break;
+
+                }
+
+                var faction = FactionMap.Get(Province.FactionId);
+
+                GD.Print($"Province {ProvinceId} belongs to faction {faction.Id} with color {faction.Color}");
+
+                BaseColor = faction.Color;
+
                 HoverColor = new Color(0.6f, 0.4f, 0.2f, 0.8f);
+
                 SelectedColor = new Color(0.8f, 0.6f, 0.4f, 0.8f);
+
                 break;
             case MapMode.Province:
                 BaseColor = new Color(0.4f, 0.6f, 1f, 0.5f);
@@ -107,6 +137,7 @@ public partial class ProvinceArea : Area2D
                 SetFoodMapModeColors(Province);
                 break;
         }
+        
     }
     
     private void SetFoodMapModeColors(Province.Entity.Province p)
