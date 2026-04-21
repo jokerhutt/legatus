@@ -25,6 +25,9 @@ public partial class DiplomacyView : PanelContainer
     private Label YourName;
     private Label StatusLabel;
     private Label StatusIcon;
+    
+    private TextureRect _yourCrest;
+    private TextureRect _theirCrest;
 
     // Action buttons
     private Button _declareWarBtn;
@@ -52,6 +55,9 @@ public partial class DiplomacyView : PanelContainer
         TheirOpinonValue = GetNodeOrNull<Label>("%TheirOpinionValue");
         StatusLabel = GetNodeOrNull<Label>("%StatusLabel");
         StatusIcon = GetNodeOrNull<Label>("%StatusIcon");
+        
+        _yourCrest = GetNodeOrNull<TextureRect>("%YourCrest");
+        _theirCrest = GetNodeOrNull<TextureRect>("%TheirCrest");
 
         // Action buttons
         _declareWarBtn = GetNodeOrNull<Button>("%DeclareWarBtn");
@@ -147,6 +153,8 @@ public partial class DiplomacyView : PanelContainer
 
         if (TheirName != null) TheirName.Text = data.Them.FactionName;
         if (YourName != null) YourName.Text = data.Us.FactionName;
+        if (_yourCrest != null) _yourCrest.Texture = _diplomacyController.GetFactionCrest(PlayerFactionId);
+        if (_theirCrest != null) _theirCrest.Texture = _diplomacyController.GetFactionCrest(TargetFactionId);
         if (YourOpinionValue != null) YourOpinionValue.Text = FormatOpinion(data.Opinion.FromAToB);
         if (TheirOpinonValue != null) TheirOpinonValue.Text = FormatOpinion(data.Opinion.FromBToA);
         UpdateStatus(data.Relation);
@@ -227,4 +235,5 @@ public partial class DiplomacyView : PanelContainer
         }
     }
 }
+
 

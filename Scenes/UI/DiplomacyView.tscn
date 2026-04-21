@@ -62,10 +62,10 @@ size_flags_horizontal = 3
 
 [node name="YourCrest" type="TextureRect" parent="Scroll/Margin/VBox/FactionHeader/YourFaction"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
-expand_mode = 1
+expand_mode = 3
 stretch_mode = 5
 
 [node name="YourName" type="Label" parent="Scroll/Margin/VBox/FactionHeader/YourFaction"]
@@ -87,10 +87,10 @@ size_flags_horizontal = 3
 
 [node name="TheirCrest" type="TextureRect" parent="Scroll/Margin/VBox/FactionHeader/TheirFaction"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
-expand_mode = 1
+expand_mode = 3
 stretch_mode = 5
 
 [node name="TheirName" type="Label" parent="Scroll/Margin/VBox/FactionHeader/TheirFaction"]

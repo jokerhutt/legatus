@@ -93,4 +93,10 @@ public class DiplomacyController
     }
 
     public int GetGiftCost() => GiftCost;
+
+    public Godot.Texture2D GetFactionCrest(string factionId)
+    {
+        var f = _factionService.GetFaction(factionId);
+        return f?.Crest;
+    }
 }
