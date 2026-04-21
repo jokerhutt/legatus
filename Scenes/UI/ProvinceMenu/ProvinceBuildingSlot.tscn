@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://pq6pe13n2khs"]
+
+[ext_resource type="Script" uid="uid://dwm6pkgsdl1at" path="res://Scripts/UI/Map/Slot/ProvinceBuildingSlot.cs" id="1_r2dbv"]
+
+[node name="ProvinceBuildingSlot" type="PanelContainer" node_paths=PackedStringArray("Container")]
+custom_minimum_size = Vector2(120, 56)
+offset_right = 120.0
+offset_bottom = 56.0
+size_flags_horizontal = 3
+script = ExtResource("1_r2dbv")
+Container = NodePath("Content")
+
+[node name="Content" type="Control" parent="."]
+layout_mode = 2

@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://curumwjtqk7cr"]
+
+[ext_resource type="Theme" uid="uid://dy1b0auwkyjnb" path="res://ui/ui_theme.tres" id="1_uwi8y"]
+[ext_resource type="Texture2D" uid="uid://chxyvti5flegq" path="res://assets/icons/military/legatus.png" id="2_617qn"]
+[ext_resource type="Script" uid="uid://brx6nnbctcwm1" path="res://Scripts/UI/Map/Army/CompactArmyCard.cs" id="3_spqj0"]
+[ext_resource type="Texture2D" uid="uid://b8103qgb8xaj" path="res://assets/buttons/arrow_right_small.png" id="4_617qn"]
+[ext_resource type="Texture2D" uid="uid://bsfesicpwwuun" path="res://assets/buttons/black/arrow_right_small_black.png" id="4_spqj0"]
+
+[node name="ArmyCard" type="PanelContainer"]
+texture_filter = 1
+offset_right = 160.0
+offset_bottom = 58.0
+theme = ExtResource("1_uwi8y")
+script = ExtResource("3_spqj0")
+
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Icon" type="TextureRect" parent="HBox"]
+custom_minimum_size = Vector2(30, 26)
+layout_mode = 2
+texture = ExtResource("2_617qn")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Info" type="VBoxContainer" parent="HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="ArmyName" type="Label" parent="HBox/Info"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Legio I"
+
+[node name="UnitCount" type="Label" parent="HBox/Info"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.38, 0.13, 1)
+theme_override_font_sizes/font_size = 14
+text = "3200 men"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="SoldiersCount" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.6, 0.45, 0.1, 1)
+theme_override_font_sizes/font_size = 12
+text = "1200"
+horizontal_alignment = 2
+
+[node name="SelectUnitButton" type="TextureButton" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+texture_normal = ExtResource("4_spqj0")
+texture_pressed = ExtResource("4_617qn")
+texture_hover = ExtResource("4_617qn")

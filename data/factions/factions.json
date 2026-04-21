@@ -1,0 +1,248 @@
+{
+  "factions": [
+	{
+	  "id": "ROM",
+	  "name": "Rome",
+	  "ruler": "Consul",
+	  "color": "#ff0000",
+	  "coins": 200,
+	  "opinions": {
+		"SAM": -60,
+		"TAR": -30,
+		"CAR": -40,
+		"ETR": -10,
+		"SEN": -50,
+		"BOI": -40
+	  }
+	},
+	{
+	  "id": "SAM",
+	  "name": "Samnium",
+	  "ruler": "Tribal Chief",
+	  "color": "#00ff00",
+	  "coins": 60,
+	  "opinions": {
+		"ROM": -70,
+		"APU": 20
+	  }
+	},
+	{
+	  "id": "APU",
+	  "name": "Apulia",
+	  "ruler": "Local King",
+	  "color": "#00ffff",
+	  "coins": 70,
+	  "opinions": {
+		"ROM": 10,
+		"SAM": -10,
+		"TAR": 15
+	  }
+	},
+	{
+	  "id": "TAR",
+	  "name": "Tarentum",
+	  "ruler": "Archon",
+	  "color": "#ffff00",
+	  "coins": 90,
+	  "opinions": {
+		"ROM": -40,
+		"CAR": 30,
+		"APU": 10
+	  }
+	},
+	{
+	  "id": "SIC",
+	  "name": "Sicily",
+	  "ruler": "Tyrant",
+	  "color": "#0080ff",
+	  "coins": 80,
+	  "opinions": {
+		"CAR": -20,
+		"TAR": 10
+	  }
+	},
+	{
+	  "id": "CAR",
+	  "name": "Carthage",
+	  "ruler": "Suffete",
+	  "color": "#0040ff",
+	  "coins": 150,
+	  "opinions": {
+		"ROM": -50,
+		"TAR": 40,
+		"SIC": -10
+	  }
+	},
+	{
+	  "id": "ETR",
+	  "name": "Etruria",
+	  "ruler": "Lucumo",
+	  "color": "#00ffcc",
+	  "coins": 100,
+	  "opinions": {
+		"ROM": -20,
+		"UMB": 20
+	  }
+	},
+	{
+	  "id": "SEN",
+	  "name": "Senones",
+	  "ruler": "Tribal Chief",
+	  "color": "#ff3300",
+	  "coins": 70,
+	  "opinions": {
+		"ROM": -60,
+		"BOI": 20
+	  }
+	},
+	{
+	  "id": "BOI",
+	  "name": "Boi",
+	  "ruler": "Tribal Chief",
+	  "color": "#ffcc00",
+	  "coins": 70,
+	  "opinions": {
+		"ROM": -50,
+		"SEN": 20,
+		"INS": 15
+	  }
+	},
+	{
+	  "id": "INS",
+	  "name": "Insubria",
+	  "ruler": "Tribal Chief",
+	  "color": "#9933ff",
+	  "coins": 90,
+	  "opinions": {
+		"ROM": -40,
+		"BOI": 10,
+		"CEN": 20
+	  }
+	},
+	{
+	  "id": "UMB",
+	  "name": "Umbria",
+	  "ruler": "Elder Council",
+	  "color": "#942fde",
+	  "coins": 60,
+	  "opinions": {
+		"ROM": -15,
+		"ETR": 25,
+		"SAM": -10
+	  }
+	},
+	{
+	  "id": "FRE",
+	  "name": "Frentani",
+	  "ruler": "Tribal Chief",
+	  "color": "#d343a6",
+	  "coins": 40,
+	  "opinions": {
+		"ROM": -20,
+		"SAM": 15,
+		"UMB": 10
+	  }
+	},
+	{
+	  "id": "BRT",
+	  "name": "Bruttii",
+	  "ruler": "Tribal Chief",
+	  "color": "#c4e563",
+	  "coins": 50,
+	  "opinions": {
+		"ROM": -30,
+		"SAM": 10,
+		"TAR": -15
+	  }
+	},
+	{
+	  "id": "GEN",
+	  "name": "Ligures",
+	  "ruler": "Tribal Chief",
+	  "color": "#4b9c40",
+	  "coins": 45,
+	  "opinions": {
+		"ROM": -25,
+		"ETR": -10,
+		"INS": 10
+	  }
+	},
+	{
+	  "id": "VEN",
+	  "name": "Veneti",
+	  "ruler": "Council of Elders",
+	  "color": "#7cce95",
+	  "coins": 80,
+	  "opinions": {
+		"ROM": 15,
+		"BOI": -20,
+		"INS": -15,
+		"IST": 10
+	  }
+	},
+	{
+	  "id": "LIN",
+	  "name": "Lingones",
+	  "ruler": "Tribal Chief",
+	  "color": "#722598",
+	  "coins": 40,
+	  "opinions": {
+		"ROM": -35,
+		"BOI": 20,
+		"SEN": 15
+	  }
+	},
+	{
+	  "id": "CEN",
+	  "name": "Cenomani",
+	  "ruler": "Tribal Chief",
+	  "color": "#6d9c37",
+	  "coins": 55,
+	  "opinions": {
+		"ROM": 10,
+		"INS": 15,
+		"VEN": 20,
+		"BOI": -10
+	  }
+	},
+	{
+	  "id": "IST",
+	  "name": "Histri",
+	  "ruler": "Tribal Chief",
+	  "color": "#4b9c94",
+	  "coins": 30,
+	  "opinions": {
+		"VEN": -10,
+		"LIB": 10
+	  }
+	},
+	{
+	  "id": "LIB",
+	  "name": "Liburni",
+	  "ruler": "Tribal Chief",
+	  "color": "#9b9e39",
+	  "coins": 35,
+	  "opinions": {
+		"IST": 10,
+		"VEN": -15
+	  }
+	}
+  ],
+"treaties": [
+  { "a": "ROM", "b": "ETR", "type": "NonAggression", "duration": 20 },
+
+  { "a": "ROM", "b": "SAM", "type": "War", "duration": 10 },
+
+  { "a": "SAM", "b": "APU", "type": "Alliance", "duration": 15 },
+
+  { "a": "TAR", "b": "CAR", "type": "Alliance", "duration": 25 },
+
+  { "a": "SEN", "b": "BOI", "type": "Alliance", "duration": 30 },
+  { "a": "BOI", "b": "INS", "type": "Alliance", "duration": 30 },
+
+  { "a": "ROM", "b": "SEN", "type": "War", "duration": 15 },
+
+  { "a": "ETR", "b": "UMB", "type": "Alliance", "duration": 20 }
+],
+  "default": { "color": "#3399ff" }
+}

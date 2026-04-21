@@ -1,0 +1,89 @@
+[gd_scene load_steps=4 format=3 uid="uid://kghhil4i3tbe"]
+
+[ext_resource type="Script" uid="uid://hxap25cqevdi" path="res://Scripts/UI/Map/Building/ShopBuildingCard.cs" id="1_nou0i"]
+[ext_resource type="Texture2D" uid="uid://cgkqe16ikoyyw" path="res://icon.svg" id="2_xr4pp"]
+
+[sub_resource type="StyleBoxFlat" id="card_bg"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.76, 0.71, 0.57, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.55, 0.4, 0.15, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="ShopBuildingCard" type="PanelContainer"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("card_bg")
+script = ExtResource("1_nou0i")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="TopRow" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="VBox/TopRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("2_xr4pp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Info" type="VBoxContainer" parent="VBox/TopRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Name" type="Label" parent="VBox/TopRow/Info"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Aqueduct"
+
+[node name="Desc" type="Label" parent="VBox/TopRow/Info"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.56, 0.2, 1)
+theme_override_font_sizes/font_size = 13
+text = "+3 Food, +5% Happiness
+Unlocks irrigation for farms"
+autowrap_mode = 2
+
+[node name="BottomRow" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Cost" type="Label" parent="VBox/BottomRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.85, 0.65, 0.13, 1)
+theme_override_font_sizes/font_size = 16
+text = "Cost: 120g"
+
+[node name="BuyButton" type="Button" parent="VBox/BottomRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 28)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Build"
+
+[node name="DisabledOverlay" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.3, 0.25, 0.15, 0.55)

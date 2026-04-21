@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://gadj4mt6jj75"]
+
+[ext_resource type="Script" uid="uid://bngus5skoyu28" path="res://Scripts/UI/Map/Sidebar/DiplomacyTreatyGroup.cs" id="1_mo48n"]
+[ext_resource type="Texture2D" uid="uid://cgkqe16ikoyyw" path="res://icon.svg" id="1_s6bq0"]
+
+[node name="DiplomacyTreatyGroup" type="HBoxContainer"]
+script = ExtResource("1_mo48n")
+
+[node name="Icon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+texture = ExtResource("1_s6bq0")
+expand_mode = 1
+
+[node name="Name" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Non-Aggression Pact"
+
+[node name="Spacer" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Duration" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 13
+text = "3 turns left"

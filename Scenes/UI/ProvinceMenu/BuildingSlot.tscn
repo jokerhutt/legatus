@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=3 uid="uid://degb8nthinot3"]
+
+[ext_resource type="Texture2D" uid="uid://cgkqe16ikoyyw" path="res://icon.svg" id="1_n6gxb"]
+[ext_resource type="Script" uid="uid://bmow8kk3m4syl" path="res://Scripts/UI/Map/Slot/BuildingSlot.cs" id="2_57otk"]
+[ext_resource type="Texture2D" uid="uid://bmwexdyl1pvmg" path="res://assets/buttons/arrow_up.png" id="3_arrow"]
+[ext_resource type="Texture2D" uid="uid://davtgfg4nu56j" path="res://assets/buttons/delete.png" id="4_delete"]
+[ext_resource type="Texture2D" uid="uid://blynno18og1l7" path="res://assets/buttons/black/up_arrow_black.png" id="4_unjur"]
+
+[node name="BuildingSlot" type="VBoxContainer"]
+offset_right = 120.0
+offset_bottom = 42.0
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+script = ExtResource("2_57otk")
+
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="Icon" type="TextureRect" parent="HBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("1_n6gxb")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Info" type="VBoxContainer" parent="HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Name" type="Label" parent="HBox/Info"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Fort"
+
+[node name="Level" type="Label" parent="HBox/Info"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.38, 0.13, 1)
+theme_override_font_sizes/font_size = 12
+text = "Lv 1"
+
+[node name="Buttons" type="VBoxContainer" parent="HBox"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="UpgradeButton" type="TextureButton" parent="HBox/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture_normal = ExtResource("3_arrow")
+texture_disabled = ExtResource("4_unjur")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="DeleteButton" type="TextureButton" parent="HBox/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture_normal = ExtResource("4_delete")
+ignore_texture_size = true
+stretch_mode = 5

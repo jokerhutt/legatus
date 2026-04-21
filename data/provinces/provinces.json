@@ -1,0 +1,136 @@
+{
+  "provinces": [
+	{
+	  "name": "Latium",
+	  "ownerId": "ROM",
+	  "terrainId": 1,
+	  "population": 7,
+	  "food_surplus": 8,
+	  "happiness": 75,
+	  "buildings": [
+		{ "buildingId": "farm", "level": 2 },
+		{ "buildingId": "tax_office", "level": 1 },
+		{ "buildingId": "fort", "level": 1 }
+	  ]
+	},
+	{
+	  "name": "Campania",
+	  "ownerId": "ROM",
+	  "terrainId": 1,
+	  "population": 6,
+	  "food_surplus": 7,
+	  "happiness": 72,
+	  "buildings": [
+		{ "buildingId": "farm", "level": 2 },
+		{ "buildingId": "aqueduct", "level": 1 }
+	  ]
+	},
+
+	{ "name": "Lucania", "ownerId": "SAM", "terrainId": 2, "population": 5, "food_surplus": 4, "happiness": 55 },
+
+	{
+	  "name": "Apulia",
+	  "ownerId": "APU",
+	  "terrainId": 1,
+	  "population": 6,
+	  "food_surplus": 7,
+	  "happiness": 65,
+	  "buildings": [
+		{ "buildingId": "farm", "level": 1 }
+	  ]
+	},
+
+	{
+	  "name": "Tarentum",
+	  "ownerId": "TAR",
+	  "terrainId": 1,
+	  "population": 7,
+	  "food_surplus": 8,
+	  "happiness": 70,
+	  "buildings": [
+		{ "buildingId": "farm", "level": 1 },
+		{ "buildingId": "tax_office", "level": 1 }
+	  ]
+	},
+
+	{
+	  "name": "Syracuse",
+	  "ownerId": "SIC",
+	  "terrainId": 1,
+	  "population": 8,
+	  "food_surplus": 10,
+	  "happiness": 80,
+	  "buildings": [
+		{ "buildingId": "farm", "level": 2 },
+		{ "buildingId": "aqueduct", "level": 1 },
+		{ "buildingId": "fort", "level": 1 }
+	  ]
+	},
+
+	{ "name": "Sicania", "ownerId": "SIC", "terrainId": 2, "population": 6, "food_surplus": 5, "happiness": 60 },
+	{ "name": "Siculia", "ownerId": "SIC", "terrainId": 1, "population": 7, "food_surplus": 8, "happiness": 70 },
+
+	{ "name": "Aeternum", "ownerId": "FRE", "terrainId": 2, "population": 4, "food_surplus": 3, "happiness": 50 },
+
+	{
+	  "name": "Carthago",
+	  "ownerId": "CAR",
+	  "terrainId": 1,
+	  "population": 9,
+	  "food_surplus": 11,
+	  "happiness": 78,
+	  "buildings": [
+		{ "buildingId": "farm", "level": 2 },
+		{ "buildingId": "tax_office", "level": 2 },
+		{ "buildingId": "fort", "level": 2 }
+	  ]
+	},
+
+	{
+	  "name": "Zeugitania",
+	  "ownerId": "CAR",
+	  "terrainId": 1,
+	  "population": 7,
+	  "food_surplus": 8,
+	  "happiness": 68,
+	  "buildings": [
+		{ "buildingId": "farm", "level": 1 }
+	  ]
+	},
+
+	{ "name": "Tharracania", "ownerId": "CAR", "terrainId": 2, "population": 5, "food_surplus": 4, "happiness": 55 },
+	{ "name": "Iliensia", "ownerId": "CAR", "terrainId": 2, "population": 4, "food_surplus": 3, "happiness": 52 },
+	{ "name": "Dalaria", "ownerId": "CAR", "terrainId": 2, "population": 4, "food_surplus": 3, "happiness": 52 },
+
+	{
+	  "name": "Dodecapolis",
+	  "ownerId": "ETR",
+	  "terrainId": 1,
+	  "population": 7,
+	  "food_surplus": 8,
+	  "happiness": 70,
+	  "buildings": [
+		{ "buildingId": "farm", "level": 1 },
+		{ "buildingId": "tax_office", "level": 1 }
+	  ]
+	},
+
+	{ "name": "Corsica", "ownerId": "ETR", "terrainId": 2, "population": 3, "food_surplus": 2, "happiness": 48 },
+	{ "name": "Vallis Arni", "ownerId": "ETR", "terrainId": 1, "population": 6, "food_surplus": 7, "happiness": 66 },
+	{ "name": "Tuscia", "ownerId": "ETR", "terrainId": 1, "population": 7, "food_surplus": 8, "happiness": 70 },
+
+	{ "name": "Liguria", "ownerId": "GEN", "terrainId": 2, "population": 5, "food_surplus": 4, "happiness": 55 },
+	{ "name": "Picenum", "ownerId": "UMB", "terrainId": 1, "population": 6, "food_surplus": 7, "happiness": 65 },
+	{ "name": "Bruttium", "ownerId": "BRT", "terrainId": 2, "population": 6, "food_surplus": 5, "happiness": 58 },
+	{ "name": "Ariminum", "ownerId": "SEN", "terrainId": 1, "population": 6, "food_surplus": 7, "happiness": 67 },
+	{ "name": "Venetia", "ownerId": "VEN", "terrainId": 1, "population": 7, "food_surplus": 8, "happiness": 72 },
+	{ "name": "Olana", "ownerId": "LIN", "terrainId": 2, "population": 4, "food_surplus": 3, "happiness": 50 },
+	{ "name": "Aemilla", "ownerId": "BOI", "terrainId": 1, "population": 6, "food_surplus": 7, "happiness": 64 },
+	{ "name": "Insburia", "ownerId": "INS", "terrainId": 1, "population": 7, "food_surplus": 8, "happiness": 68 },
+	{ "name": "Cenomannia", "ownerId": "CEN", "terrainId": 1, "population": 6, "food_surplus": 7, "happiness": 66 },
+	{ "name": "Hystria", "ownerId": "IST", "terrainId": 2, "population": 3, "food_surplus": 2, "happiness": 45 },
+	{ "name": "Libernia", "ownerId": "LIB", "terrainId": 2, "population": 4, "food_surplus": 3, "happiness": 50 },
+
+	{ "name": "Mountains", "ownerId": null, "terrainId": 3, "population": 1, "food_surplus": 0, "happiness": 40 }
+  ]
+}

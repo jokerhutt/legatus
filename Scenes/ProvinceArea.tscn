@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ceoyjtlbiie12"]
+
+[ext_resource type="Script" uid="uid://dsjd1um24wvav" path="res://Scripts/Map/ProvinceArea.cs" id="1_vmg83"]
+
+[node name="ProvinceArea" type="Area2D"]
+script = ExtResource("1_vmg83")

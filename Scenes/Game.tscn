@@ -1,0 +1,71 @@
+[gd_scene load_steps=14 format=3 uid="uid://b7cde2c8bu2b1"]
+
+[ext_resource type="Script" uid="uid://d1f1vrg41hjx6" path="res://Scripts/Bootstrap.cs" id="1_7lihs"]
+[ext_resource type="Script" uid="uid://bdwo60db7q7b7" path="res://Scripts/Map/MapController.cs" id="1_j5yw3"]
+[ext_resource type="Script" uid="uid://cdulvm8b0exfr" path="res://Scripts/Camera/Camera.cs" id="2_kldst"]
+[ext_resource type="Texture2D" uid="uid://b1dj5ijsuoqa2" path="res://map/romemap.png" id="2_v1qfn"]
+[ext_resource type="Script" uid="uid://bl0ip6fltpo1e" path="res://Scripts/State/InputHandler.cs" id="4_kldst"]
+[ext_resource type="PackedScene" uid="uid://fwqa4a7wndjm" path="res://Scenes/UI/ProvinceMenu.tscn" id="5_b2bpf"]
+[ext_resource type="Texture2D" uid="uid://n4wgsgyge2i1" path="res://assets/icons/coin/goldCoin.png" id="7_bf53h"]
+[ext_resource type="PackedScene" uid="uid://bwx4fdalktavg" path="res://Scenes/UI/TopBar.tscn" id="7_fgofq"]
+[ext_resource type="Texture2D" uid="uid://cahlffgfqyqqu" path="res://assets/icons/flag/flagSPQR.png" id="8_71axn"]
+[ext_resource type="Texture2D" uid="uid://dly0evftv76jg" path="res://assets/icons/prestige/Laurels.png" id="9_71axn"]
+[ext_resource type="PackedScene" uid="uid://bfk1rahdkn54a" path="res://Scenes/UI/GameActionsMenu/GameActionsMenu.tscn" id="11_dahhg"]
+[ext_resource type="PackedScene" uid="uid://b0cn5gh3jpwwl" path="res://Scenes/UI/SidePanel.tscn" id="12_3so38"]
+[ext_resource type="PackedScene" uid="uid://dx67a5reib24s" path="res://Scenes/UI/DiplomacyView.tscn" id="13_3cx6b"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_7lihs")
+
+[node name="MapController" type="Node2D" parent="." node_paths=PackedStringArray("MapImage", "Provinces")]
+script = ExtResource("1_j5yw3")
+MapImage = NodePath("Romemap")
+ProvinceDataPath = "res://data/provinces/provinces.json"
+ProvinceMetadataPath = "res://data/provinces/provincesMetadata.txt"
+TerrainDataPath = "res://data/terrain/terrain.json"
+FactionDataPath = "res://data/factions/factions.json"
+BuildingDataPath = "res://data/buildings/buildings.json"
+Provinces = NodePath("Provinces")
+
+[node name="Camera2D" type="Camera2D" parent="MapController" node_paths=PackedStringArray("MapImage")]
+scale = Vector2(3, 3)
+limit_left = -1065
+limit_top = -1177
+limit_right = 1064
+limit_bottom = 1177
+script = ExtResource("2_kldst")
+MapImage = NodePath("../Romemap")
+
+[node name="Romemap" type="Sprite2D" parent="MapController"]
+texture_filter = 1
+scale = Vector2(5, 5)
+texture = ExtResource("2_v1qfn")
+centered = false
+
+[node name="Sea" type="ColorRect" parent="MapController"]
+visible = false
+offset_right = 2137.0
+offset_bottom = 2356.0
+mouse_filter = 2
+color = Color(0.10781914, 0.37433022, 0.34879622, 1)
+
+[node name="Provinces" type="Node2D" parent="MapController"]
+
+[node name="InputHandler" type="Node" parent="MapController"]
+script = ExtResource("4_kldst")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TopBar" parent="CanvasLayer" instance=ExtResource("7_fgofq")]
+CoinsTexture = ExtResource("7_bf53h")
+ProvincesTexture = ExtResource("8_71axn")
+YearTexture = ExtResource("9_71axn")
+
+[node name="ProvinceMenu" parent="CanvasLayer" instance=ExtResource("5_b2bpf")]
+offset_top = -350.0
+
+[node name="GameActionsMenu" parent="CanvasLayer" instance=ExtResource("11_dahhg")]
+
+[node name="SidePanel" parent="CanvasLayer" instance=ExtResource("12_3so38")]
+
+[node name="DiplomacyView" parent="CanvasLayer" instance=ExtResource("13_3cx6b")]

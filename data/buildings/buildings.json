@@ -1,0 +1,40 @@
+{
+  "buildings": [
+	{
+	  "id": "farm",
+	  "name": "Farm",
+	  "description": "Fertile fields worked by local farmers. Produces grain to feed the population and generates a small income from surplus trade.",
+	  "levels": [
+		{ "level": 1, "cost": 50, "maintenance": 1, "foodYield": 3, "goldYield": 1, "foodMultiplier": 1.0, "goldMultiplier": 1.0, "defenseBonus": 0, "mapTexture": "res://assets/sprites/map/farm.png", "iconTexture": "res://assets/icons/building/cornucopia.svg" },
+		{ "level": 2, "cost": 100, "maintenance": 2, "foodYield": 6, "goldYield": 2, "foodMultiplier": 1.0, "goldMultiplier": 1.0, "defenseBonus": 0, "mapTexture": "res://assets/sprites/map/farm.png", "iconTexture": "res://assets/icons/building/cornucopia.svg" }
+	  ]
+	},
+	{
+	  "id": "aqueduct",
+	  "name": "Aqueduct",
+	  "description": "An engineering marvel that channels fresh water across the province. Greatly increases agricultural output by irrigating surrounding farmland.",
+	  "levels": [
+		{ "level": 1, "cost": 80, "maintenance": 2, "foodYield": 0, "goldYield": 0, "foodMultiplier": 1.2, "goldMultiplier": 1.0, "defenseBonus": 0, "mapTexture": "res://assets/sprites/map/Column2.png", "iconTexture": "res://assets/icons/building/aqueduct.svg" },
+		{ "level": 2, "cost": 150, "maintenance": 3, "foodYield": 0, "goldYield": 0, "foodMultiplier": 1.4, "goldMultiplier": 1.0, "defenseBonus": 0, "mapTexture": "res://assets/sprites/map/Column2.png", "iconTexture": "res://assets/icons/building/aqueduct.svg" }
+	  ]
+	},
+	{
+	  "id": "tax_office",
+	  "name": "Tax Office",
+	  "description": "A bureaucratic outpost staffed by censors and publicani. Collects taxes from local commerce and boosts the province's gold income.",
+	  "levels": [
+		{ "level": 1, "cost": 60, "maintenance": 1, "foodYield": 0, "goldYield": 4, "foodMultiplier": 1.0, "goldMultiplier": 1.1, "defenseBonus": 0, "mapTexture": "res://assets/sprites/map/Insula.png", "iconTexture": "res://assets/icons/building/tablet.svg" },
+		{ "level": 2, "cost": 120, "maintenance": 2, "foodYield": 0, "goldYield": 8, "foodMultiplier": 1.0, "goldMultiplier": 1.25, "defenseBonus": 0, "mapTexture": "res://assets/sprites/map/Insula.png", "iconTexture": "res://assets/icons/building/tablet.svg" }
+	  ]
+	},
+	{
+	  "id": "fort",
+	  "name": "Fort",
+	  "description": "A fortified military installation with watchtowers and palisades. Provides a defensive bonus when the province is under attack.",
+	  "levels": [
+		{ "level": 1, "cost": 70, "maintenance": 1, "foodYield": 0, "goldYield": 0, "foodMultiplier": 1.0, "goldMultiplier": 1.0, "defenseBonus": 2, "mapTexture": "res://assets/sprites/map/Colloseum.png", "iconTexture": "res://assets/icons/building/palisade.svg" },
+		{ "level": 2, "cost": 140, "maintenance": 2, "foodYield": 0, "goldYield": 0, "foodMultiplier": 1.0, "goldMultiplier": 1.0, "defenseBonus": 5, "mapTexture": "res://assets/sprites/map/Colloseum.png", "iconTexture": "res://assets/icons/building/palisade.svg" }
+	  ]
+	}
+  ]
+}

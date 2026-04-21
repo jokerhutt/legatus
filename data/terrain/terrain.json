@@ -1,0 +1,31 @@
+  {
+	"terrains": [
+	{
+	  "id": 1,
+	  "name": "Plains",
+	  "foodYield": 5,
+	  "movementCost": 1,
+	  "defenseBonus": 0,
+	  "texture": "res://assets/textures/terrain/grass.png",
+		"icon": "res://assets/icons/terrain/plain.png"
+	},
+	{
+	  "id": 2,
+	  "name": "Hills",
+	  "foodYield": 3,
+	  "movementCost": 2,
+	  "defenseBonus": 1,
+	  "texture": "res://assets/textures/terrain/hill.png",
+	"icon": "res://assets/icons/terrain/hills.png"
+	},
+	{
+	  "id": 3,
+	  "name": "Mountains",
+	  "foodYield": 0,
+	  "movementCost": 3,
+	  "defenseBonus": 3,
+	  "texture": "res://assets/textures/terrain/mountain.png",
+	"icon": "res://assets/icons/terrain/mountain.png"
+	}
+  ]
+}
