@@ -1,4 +1,4 @@
-namespace Practice.Scripts.Diplomacy.Model.Enum;
+namespace Legatus.Scripts.Diplomacy.Model.Enum;
 
 public class OpinionModifier
 {

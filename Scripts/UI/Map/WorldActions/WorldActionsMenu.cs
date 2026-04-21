@@ -1,7 +1,7 @@
 using Godot;
-using Practice.Scripts.World.Events;
+using Legatus.Scripts.World.Events;
 
-namespace Practice.Scripts.UI.Map.WorldActions;
+namespace Legatus.Scripts.UI.Map.WorldActions;
 
 public partial class WorldActionsMenu : PanelContainer
 {

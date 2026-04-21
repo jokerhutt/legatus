@@ -1,4 +1,4 @@
-namespace Practice.Scripts.Faction.Enum;
+namespace Legatus.Scripts.Faction.Enum;
 
 public enum TaxRate
 {

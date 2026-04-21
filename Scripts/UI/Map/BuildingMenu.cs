@@ -1,11 +1,11 @@
 using System.Linq;
 using Godot;
-using Practice.Scripts.Buildings.Dictionary;
-using Practice.Scripts.Economy;
-using Practice.Scripts.Province;
-using Practice.Scripts.UI.Map.Building;
+using Legatus.Scripts.Buildings.Dictionary;
+using Legatus.Scripts.Economy;
+using Legatus.Scripts.Province;
+using Legatus.Scripts.UI.Map.Building;
 
-namespace Practice.Scripts.UI.Map.Army;
+namespace Legatus.Scripts.UI.Map.Army;
 
 public partial class BuildingMenu : PanelContainer
 {

@@ -1,6 +1,6 @@
-using Practice.Scripts.Diplomacy.Model.Enum;
+using Legatus.Scripts.Diplomacy.Model.Enum;
 
-namespace Practice.Scripts.Diplomacy.Model;
+namespace Legatus.Scripts.Diplomacy.Model;
 
 public class Treaty
 {

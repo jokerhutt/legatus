@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Practice.Scripts.Economy.Events;
+namespace Legatus.Scripts.Economy.Events;
 
 public partial class EconomyEvents : Node
 {

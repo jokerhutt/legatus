@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Practice.Scripts.Buildings.Model;
+namespace Legatus.Scripts.Buildings.Model;
 
 public class BuildingLevel
 {

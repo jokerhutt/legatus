@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Practice.Scripts.Util;
+namespace Legatus.Scripts.Util;
 using SCG = System.Collections.Generic;
 
 public static class ImageUtil

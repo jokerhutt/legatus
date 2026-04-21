@@ -1,4 +1,4 @@
-namespace Practice.Scripts.Province.Entity;
+namespace Legatus.Scripts.Province.Entity;
 
 public class ProvinceBuilding
 {

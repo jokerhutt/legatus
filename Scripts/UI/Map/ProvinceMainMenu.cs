@@ -1,13 +1,13 @@
 using Godot;
-using Practice.Scripts.Buildings.Dictionary;
-using Practice.Scripts.Economy;
-using Practice.Scripts.Faction;
-using Practice.Scripts.Map;
-using Practice.Scripts.Province;
-using Practice.Scripts.UI.Map.Army;
-using Practice.Scripts.UI.Map.Slot;
+using Legatus.Scripts.Buildings.Dictionary;
+using Legatus.Scripts.Economy;
+using Legatus.Scripts.Faction;
+using Legatus.Scripts.Map;
+using Legatus.Scripts.Province;
+using Legatus.Scripts.UI.Map.Army;
+using Legatus.Scripts.UI.Map.Slot;
 
-namespace Practice.Scripts.UI.Map;
+namespace Legatus.Scripts.UI.Map;
 
 public partial class ProvinceMainMenu : MarginContainer
 {

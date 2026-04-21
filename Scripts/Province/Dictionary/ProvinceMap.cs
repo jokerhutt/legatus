@@ -1,8 +1,8 @@
 using SCG = System.Collections.Generic;
 using Godot;
-using Practice.Scripts.Abstract;
+using Legatus.Scripts.Abstract;
 using GDC = Godot.Collections;
-namespace Practice.Scripts.Province.Dictionary;
+namespace Legatus.Scripts.Province.Dictionary;
 
 public class ProvinceMap : BaseMap<Entity.Province>
 {

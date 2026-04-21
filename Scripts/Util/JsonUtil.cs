@@ -1,7 +1,7 @@
 using System;
 using Godot;
 using GDC = Godot.Collections;
-namespace Practice.Scripts.Util;
+namespace Legatus.Scripts.Util;
 
 public static class JsonUtil
 {

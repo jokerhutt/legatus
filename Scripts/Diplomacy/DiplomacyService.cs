@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using Practice.Scripts.Diplomacy.Model;
-using Practice.Scripts.Diplomacy.Model.Enum;
-using Practice.Scripts.Diplomacy.Views;
-using Practice.Scripts.Faction;
+using Legatus.Scripts.Diplomacy.Model;
+using Legatus.Scripts.Diplomacy.Model.Enum;
+using Legatus.Scripts.Diplomacy.Views;
+using Legatus.Scripts.Faction;
 
-namespace Practice.Scripts.Diplomacy;
+namespace Legatus.Scripts.Diplomacy;
 
 public class DiplomacyService
 {

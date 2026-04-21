@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Practice.Scripts.UI.Map.Army;
+namespace Legatus.Scripts.UI.Map.Army;
 
 public partial class CompactArmyCard : PanelContainer
 {

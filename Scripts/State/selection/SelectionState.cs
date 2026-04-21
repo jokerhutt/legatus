@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Practice.Scripts.State;
+namespace Legatus.Scripts.State;
 
 public partial class SelectionState : Node
 {

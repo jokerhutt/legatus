@@ -1,14 +1,14 @@
 using Godot;
-using Practice.Scripts.Buildings.Dictionary;
-using Practice.Scripts.Economy;
-using Practice.Scripts.Economy.Events;
-using Practice.Scripts.Faction;
-using Practice.Scripts.Map;
-using Practice.Scripts.Province;
-using Practice.Scripts.State;
-using Practice.Scripts.UI.Map.Army;
+using Legatus.Scripts.Buildings.Dictionary;
+using Legatus.Scripts.Economy;
+using Legatus.Scripts.Economy.Events;
+using Legatus.Scripts.Faction;
+using Legatus.Scripts.Map;
+using Legatus.Scripts.Province;
+using Legatus.Scripts.State;
+using Legatus.Scripts.UI.Map.Army;
 
-namespace Practice.Scripts.UI.Map;
+namespace Legatus.Scripts.UI.Map;
 
 public partial class ProvinceMenu : PanelContainer
 {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Godot;
 
-namespace Practice.Scripts.Province.Entity;
+namespace Legatus.Scripts.Province.Entity;
 using Faction.Model;
 public class Province
 {

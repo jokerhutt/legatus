@@ -1,8 +1,8 @@
 using Godot;
-using Practice.Scripts.Diplomacy;
-using Practice.Scripts.State;
+using Legatus.Scripts.State;
+using Legatus.Scripts.Diplomacy;
 
-namespace Practice.Scripts.UI.Map;
+namespace Legatus.Scripts.UI.Map;
 
 public partial class SidePanel : VBoxContainer
 {

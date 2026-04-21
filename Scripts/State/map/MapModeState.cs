@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-namespace Practice.Scripts.State.map;
+namespace Legatus.Scripts.State.map;
 
 public partial class MapModeState : Node
 {

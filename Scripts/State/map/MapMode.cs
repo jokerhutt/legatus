@@ -1,4 +1,4 @@
-namespace Practice.Scripts.State.map;
+namespace Legatus.Scripts.State.map;
 
 public enum MapMode
 {

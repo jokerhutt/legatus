@@ -1,6 +1,6 @@
-using Practice.Scripts.Abstract;
+using Legatus.Scripts.Abstract;
 
-namespace Practice.Scripts.Buildings.Dictionary;
+namespace Legatus.Scripts.Buildings.Dictionary;
 
 public class BuildingMap : BaseMap<Model.Building>
 {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Practice.Scripts.Abstract;
+namespace Legatus.Scripts.Abstract;
 
 public abstract class BaseMap<T>
 {

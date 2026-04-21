@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Practice.Scripts.Faction.Enum;
+using Legatus.Scripts.Faction.Enum;
 
-namespace Practice.Scripts.Faction.Model;
+namespace Legatus.Scripts.Faction.Model;
 using Godot;
     
 public class Faction

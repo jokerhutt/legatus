@@ -1,15 +1,15 @@
 using System;
 using Godot;
-using Practice.Scripts.Buildings.Model;
-using Practice.Scripts.Diplomacy.Model;
-using Practice.Scripts.Diplomacy.Model.Enum;
-using Practice.Scripts.Faction;
-using Practice.Scripts.Province;
-using Practice.Scripts.State;
-using Practice.Scripts.Util;
+using Legatus.Scripts.Buildings.Model;
+using Legatus.Scripts.Diplomacy.Model;
+using Legatus.Scripts.Diplomacy.Model.Enum;
+using Legatus.Scripts.Faction;
+using Legatus.Scripts.Province;
+using Legatus.Scripts.State;
+using Legatus.Scripts.Util;
 using GDC = Godot.Collections;
 using SCG = System.Collections.Generic;
-namespace Practice.Scripts.Map;
+namespace Legatus.Scripts.Map;
 
 public partial class MapController : Node2D
 {

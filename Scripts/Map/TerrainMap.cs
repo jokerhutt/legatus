@@ -1,6 +1,6 @@
-using Practice.Scripts.Abstract;
+using Legatus.Scripts.Abstract;
 
-namespace Practice.Scripts.Map;
+namespace Legatus.Scripts.Map;
 
 public class TerrainMap : BaseMap<Terrain>
 {

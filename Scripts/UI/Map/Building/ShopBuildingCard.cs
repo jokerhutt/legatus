@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Practice.Scripts.UI.Map.Building;
+namespace Legatus.Scripts.UI.Map.Building;
 
 public partial class ShopBuildingCard : PanelContainer
 {

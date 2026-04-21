@@ -1,17 +1,17 @@
-using Practice.Scripts.Diplomacy;
-using Practice.Scripts.Diplomacy.Controller;
-using Practice.Scripts.Diplomacy.Events;
-using Practice.Scripts.Economy;
-using Practice.Scripts.Economy.Events;
-using Practice.Scripts.Faction;
-using Practice.Scripts.Map;
-using Practice.Scripts.UI.Map;
-using Practice.Scripts.UI.Map.TopBar;
-using Practice.Scripts.UI.Map.WorldActions;
-using Practice.Scripts.World.Events;
-using Practice.Scripts.World.Service;
+using Legatus.Scripts.Diplomacy;
+using Legatus.Scripts.Diplomacy.Controller;
+using Legatus.Scripts.Diplomacy.Events;
+using Legatus.Scripts.Economy;
+using Legatus.Scripts.Economy.Events;
+using Legatus.Scripts.Faction;
+using Legatus.Scripts.Map;
+using Legatus.Scripts.UI.Map;
+using Legatus.Scripts.UI.Map.TopBar;
+using Legatus.Scripts.World.Events;
+using Legatus.Scripts.World.Service;
+using Legatus.Scripts.UI.Map.WorldActions;
 
-namespace Practice.Scripts;
+namespace Legatus.Scripts;
 
 using Godot;
 using State;

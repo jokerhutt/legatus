@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-namespace Practice.Scripts.Util;
+namespace Legatus.Scripts.Util;
 using GDC = Godot.Collections;
 
 public static class FSUtil 

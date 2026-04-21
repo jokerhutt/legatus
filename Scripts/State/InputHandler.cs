@@ -1,6 +1,6 @@
-using Practice.Scripts.State.map;
+using Legatus.Scripts.State.map;
 
-namespace Practice.Scripts.State;
+namespace Legatus.Scripts.State;
 using Godot;
 
 public partial class InputHandler : Node

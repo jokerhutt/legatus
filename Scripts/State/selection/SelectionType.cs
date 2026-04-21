@@ -1,4 +1,4 @@
-namespace Practice.Scripts.State;
+namespace Legatus.Scripts.State;
 
 public enum SelectionType
 {

@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Practice.Scripts.UI.Map.Sidebar;
+namespace Legatus.Scripts.UI.Map.Sidebar;
 
 public partial class DiplomacyTreatyGroup : HBoxContainer
 {

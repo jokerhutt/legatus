@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Practice.Scripts.Buildings.Model;
+namespace Legatus.Scripts.Buildings.Model;
 
 public class Building
 {

@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [audio]
 
-general/name="Practice"
+general/name="Legatus"
 
 [autoload]
 
@@ -35,7 +35,7 @@ window/main_scene="uid://b7cde2c8bu2b1"
 
 [dotnet]
 
-project/assembly_name="Practice"
+project/assembly_name="Legatus"
 
 [file_customization]
 

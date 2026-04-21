@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
-using Practice.Scripts.Faction.Enum;
-using Practice.Scripts.Faction.Map;
-using Practice.Scripts.Province.Dictionary;
+using Legatus.Scripts.Faction.Enum;
+using Legatus.Scripts.Faction.Map;
+using Legatus.Scripts.Province.Dictionary;
 using GDC = Godot.Collections;
-namespace Practice.Scripts.Faction;
+namespace Legatus.Scripts.Faction;
 
 public class FactionService
 {

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using Practice.Scripts.Diplomacy.Model;
-using Practice.Scripts.Diplomacy.Model.Enum;
+using Legatus.Scripts.Diplomacy.Model;
+using Legatus.Scripts.Diplomacy.Model.Enum;
 
-namespace Practice.Scripts.Diplomacy.Views;
+namespace Legatus.Scripts.Diplomacy.Views;
 
 public class DiplomacyViewDTO
 {

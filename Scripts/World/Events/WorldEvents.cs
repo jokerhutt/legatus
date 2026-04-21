@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Practice.Scripts.World.Events;
+namespace Legatus.Scripts.World.Events;
 
 public partial class WorldEvents : Node
 {

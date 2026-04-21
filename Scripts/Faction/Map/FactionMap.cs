@@ -1,6 +1,6 @@
-using Practice.Scripts.Abstract;
+using Legatus.Scripts.Abstract;
 
-namespace Practice.Scripts.Faction.Map;
+namespace Legatus.Scripts.Faction.Map;
 
 public class FactionMap : BaseMap<Model.Faction>
 {

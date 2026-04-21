@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Practice.Scripts.Diplomacy.Events;
+namespace Legatus.Scripts.Diplomacy.Events;
 
 public partial class DiplomacyEvents : Node
 {

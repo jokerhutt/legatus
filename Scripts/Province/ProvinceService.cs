@@ -1,13 +1,13 @@
 using System;
 using Godot;
+using Legatus.Scripts.Buildings.Dictionary;
+using Legatus.Scripts.Faction.Enum;
+using Legatus.Scripts.Map;
+using Legatus.Scripts.Province.Dictionary;
+using Legatus.Scripts.Util;
 using Microsoft.VisualBasic;
-using Practice.Scripts.Buildings.Dictionary;
-using Practice.Scripts.Faction.Enum;
-using Practice.Scripts.Map;
-using Practice.Scripts.Province.Dictionary;
-using Practice.Scripts.Util;
 using GDC = Godot.Collections;
-namespace Practice.Scripts.Province;
+namespace Legatus.Scripts.Province;
 using Entity;
 
 public class ProvinceService

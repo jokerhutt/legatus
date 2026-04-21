@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 using Godot;
-using Practice.Scripts.Diplomacy;
-using Practice.Scripts.Diplomacy.Controller;
-using Practice.Scripts.Diplomacy.Events;
-using Practice.Scripts.Diplomacy.Model;
-using Practice.Scripts.Diplomacy.Model.Enum;
-using Practice.Scripts.Economy.Events;
-using Practice.Scripts.State;
-using Practice.Scripts.UI.Map.Sidebar;
+using Legatus.Scripts.Diplomacy.Controller;
+using Legatus.Scripts.Diplomacy.Events;
+using Legatus.Scripts.Diplomacy.Model;
+using Legatus.Scripts.Diplomacy.Model.Enum;
+using Legatus.Scripts.Economy.Events;
+using Legatus.Scripts.State;
+using Legatus.Scripts.UI.Map.Sidebar;
+using Legatus.Scripts.Diplomacy;
 
-namespace Practice.Scripts.UI.Map;
+namespace Legatus.Scripts.UI.Map;
 
 public partial class DiplomacyView : PanelContainer
 {

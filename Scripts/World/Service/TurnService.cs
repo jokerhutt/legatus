@@ -1,11 +1,11 @@
 using Godot;
-using Practice.Scripts.Economy;
-using Practice.Scripts.Faction;
-using Practice.Scripts.Province;
-using Practice.Scripts.State;
-using Practice.Scripts.World.Events;
+using Legatus.Scripts.Economy;
+using Legatus.Scripts.Faction;
+using Legatus.Scripts.Province;
+using Legatus.Scripts.State;
+using Legatus.Scripts.World.Events;
 
-namespace Practice.Scripts.World.Service;
+namespace Legatus.Scripts.World.Service;
 
 public class TurnService
 {

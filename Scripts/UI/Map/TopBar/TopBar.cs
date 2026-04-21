@@ -1,10 +1,10 @@
 using Godot;
-using Practice.Scripts.Economy.Events;
-using Practice.Scripts.Faction;
-using Practice.Scripts.State;
-using Practice.Scripts.World.Events;
+using Legatus.Scripts.Economy.Events;
+using Legatus.Scripts.Faction;
+using Legatus.Scripts.State;
+using Legatus.Scripts.World.Events;
 
-namespace Practice.Scripts.UI.Map.TopBar;
+namespace Legatus.Scripts.UI.Map.TopBar;
 
 public partial class TopBar : PanelContainer
 {

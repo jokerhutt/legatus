@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Practice.Scripts.UI.Map.Slot;
+namespace Legatus.Scripts.UI.Map.Slot;
 
 public partial class ProvinceBuildingSlot : PanelContainer
 {

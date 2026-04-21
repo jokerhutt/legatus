@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using Godot;
-using Practice.Scripts.Buildings.Dictionary;
-using Practice.Scripts.Diplomacy.Model;
-using Practice.Scripts.Faction.Map;
-using Practice.Scripts.Map;
-using Practice.Scripts.Province.Dictionary;
-using Practice.Scripts.State.map;
+using Legatus.Scripts.Buildings.Dictionary;
+using Legatus.Scripts.Diplomacy.Model;
+using Legatus.Scripts.Faction.Map;
+using Legatus.Scripts.Map;
+using Legatus.Scripts.Province.Dictionary;
+using Legatus.Scripts.State.map;
 
-namespace Practice.Scripts.State;
+namespace Legatus.Scripts.State;
 
 public partial class GameState : Node
 {

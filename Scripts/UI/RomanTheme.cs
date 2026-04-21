@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Practice.Scripts.UI;
+namespace Legatus.Scripts.UI;
 
 /// <summary>
 /// Centralised Roman-themed UI helpers — palette, fonts, factory methods.

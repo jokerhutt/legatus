@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using Godot;
-using Practice.Scripts.Province.Dictionary;
-using Practice.Scripts.State;
-using Practice.Scripts.State.map;
+using Legatus.Scripts.Province.Dictionary;
+using Legatus.Scripts.State;
+using Legatus.Scripts.State.map;
 
-namespace Practice.Scripts.Map;
+namespace Legatus.Scripts.Map;
 
 public partial class ProvinceArea : Area2D
 {

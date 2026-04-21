@@ -1,11 +1,11 @@
 using System.Linq;
 using Godot;
-using Practice.Scripts.Buildings.Dictionary;
-using Practice.Scripts.Economy.Events;
-using Practice.Scripts.Faction.Map;
-using Practice.Scripts.Province;
+using Legatus.Scripts.Buildings.Dictionary;
+using Legatus.Scripts.Economy.Events;
+using Legatus.Scripts.Faction.Map;
+using Legatus.Scripts.Province;
 
-namespace Practice.Scripts.Economy;
+namespace Legatus.Scripts.Economy;
 
 public class EconomyService
 {

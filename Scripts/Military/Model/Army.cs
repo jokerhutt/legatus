@@ -1,4 +1,4 @@
-namespace Practice.Scripts.Military.Model;
+namespace Legatus.Scripts.Military.Model;
 
 public class Army
 {
