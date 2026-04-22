@@ -63,12 +63,25 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Latium"
 
-[node name="OwnerName" type="Label" parent="MainMenu/VBox/Header/HeaderLeft"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/VBox/Header/HeaderLeft"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="OwnerName" type="Label" parent="MainMenu/VBox/Header/HeaderLeft/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.72, 0.38, 0.13, 1)
 theme_override_font_sizes/font_size = 20
 text = "Owner: Rome"
+
+[node name="OwnerButton" type="Button" parent="MainMenu/VBox/Header/HeaderLeft/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 18
+text = "->"
+text_direction = 1
 
 [node name="HeaderRight" type="HBoxContainer" parent="MainMenu/VBox/Header"]
 layout_mode = 2

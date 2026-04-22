@@ -1,12 +1,12 @@
 using System.Collections.Generic;
-using Legatus.Scripts.Diplomacy.Events;
 using Legatus.Scripts.Diplomacy.Model;
 using Legatus.Scripts.Diplomacy.Model.Enum;
 using Legatus.Scripts.Diplomacy.Views;
 using Legatus.Scripts.Economy;
 using Legatus.Scripts.Faction;
+using Practice.Scripts.Diplomacy.Events;
 
-namespace Legatus.Scripts.Diplomacy.Controller;
+namespace Practice.Scripts.Diplomacy.Controller;
 
 public class DiplomacyController
 {

@@ -234,6 +234,8 @@ public class ProvinceService
             }
         }
         
+        GD.Print($"Initialized province {p.Id} with faction {p.FactionId}, terrain {p.TerrainId}, population {p.Population}, food surplus {p.FoodSurplus}, happiness {p.GetHappiness()}, and {p.Buildings.Count} buildings");
+        
         _provinceMap.Add(p);
     }
     

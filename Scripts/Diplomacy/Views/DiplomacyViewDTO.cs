@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Legatus.Scripts.Diplomacy.Model;
 using Legatus.Scripts.Diplomacy.Model.Enum;
+using Practice.Scripts.Diplomacy;
 
 namespace Legatus.Scripts.Diplomacy.Views;
 

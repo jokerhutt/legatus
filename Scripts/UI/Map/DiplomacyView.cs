@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using Godot;
-using Legatus.Scripts.Diplomacy.Controller;
-using Legatus.Scripts.Diplomacy.Events;
 using Legatus.Scripts.Diplomacy.Model;
 using Legatus.Scripts.Diplomacy.Model.Enum;
 using Legatus.Scripts.Economy.Events;
 using Legatus.Scripts.State;
 using Legatus.Scripts.UI.Map.Sidebar;
-using Legatus.Scripts.Diplomacy;
+using Practice.Scripts.Diplomacy.Controller;
+using Practice.Scripts.Diplomacy.Events;
 
 namespace Legatus.Scripts.UI.Map;
 

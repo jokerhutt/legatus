@@ -61,6 +61,7 @@ public partial class ProvinceMenu : PanelContainer
 
         _mainMenu.Init(provinceService, factionService, terrainMap, buildingMap, PlayerFactionId, _economyService);
         _mainMenu.OnClose = Close;
+        _mainMenu.OnOwnerButtonPressed = HandleSelectFaction;
         _mainMenu.OnBuyBuilding = HandleBuyBuilding;
         _mainMenu.OnSellBuilding = HandleSellBuilding;
         
@@ -70,6 +71,12 @@ public partial class ProvinceMenu : PanelContainer
         
         EconomyEvents = GetNode<EconomyEvents>("/root/EconomyEvents");
 
+    }
+    
+    private void HandleSelectFaction(string factionId)
+    {
+        GD.Print($"Faction {factionId} selected from province menu");
+        _selectionState.SelectFaction(factionId);
     }
 
     private void OnSelectionChanged(int type, string id)

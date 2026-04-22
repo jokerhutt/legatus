@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Godot;
+using Legatus.Scripts.Faction.Map;
 using Legatus.Scripts.Province.Dictionary;
 using Legatus.Scripts.State;
 using Legatus.Scripts.State.map;
@@ -10,21 +11,24 @@ public partial class ProvinceArea : Area2D
 {
     [Export] public string ProvinceId;
     [Export] public Color BaseColor = new Color(1, 1, 1, 0.5f);
-    [Export] public Color HoverColor = new Color(1, 1, 1, 0.8f);
-    [Export] public Color SelectedColor = new Color(1, 1, 0.5f, 0.8f);
     
     private ProvinceMap ProvinceMap;
+    private FactionMap FactionMap;
 
     private SelectionState SelectionState;
     private MapModeState MapModeState;
     
     private bool IsHovered = false;
     private bool IsSelected = false;
+    
+    private List<Polygon2D> BasePolygons = new();
+    private List<Polygon2D> Overlays = new(); 
 
     public override void _Ready()
     {
         var _gameState = GetNode<GameState>("/root/GameState");
         SelectionState = _gameState.SelectionState;
+        FactionMap = _gameState.FactionMap;
         ProvinceMap = _gameState.ProvinceMap;
         SelectionState.SelectionChanged += OnSelectionChanged;
         MapModeState = _gameState.MapModeState;
@@ -57,6 +61,7 @@ public partial class ProvinceArea : Area2D
 
     private void OnMapModeChanged(int mode)
     {
+        GD.Print($"Map mode changed to {(MapMode)mode}, updating province colors of {ProvinceId}");
         SetProvinceColors((MapMode)mode);
         UpdateVisual();
     }
@@ -65,6 +70,11 @@ public partial class ProvinceArea : Area2D
     {
         if ((SelectionType)type == SelectionType.Province && id == ProvinceId)
             IsSelected = true;
+        else if ((SelectionType)type == SelectionType.Diplomacy && id != null)
+        {
+            var province = ProvinceMap.Get(ProvinceId);
+            IsSelected = province.FactionId == id;
+        }
         else IsSelected = false;
         UpdateVisual();
     }
@@ -90,23 +100,39 @@ public partial class ProvinceArea : Area2D
         {
             case MapMode.Default:
                 BaseColor = new Color(1, 1, 1, 0.5f);
-                HoverColor = new Color(1, 1, 1, 0.8f);
-                SelectedColor = new Color(1, 1, 0.5f, 0.8f);
                 break;
             case MapMode.Faction:
-                BaseColor = new Color(0.4f, 0.6f, 0.2f, 0.5f);
-                HoverColor = new Color(0.6f, 0.4f, 0.2f, 0.8f);
-                SelectedColor = new Color(0.8f, 0.6f, 0.4f, 0.8f);
+
+                GD.Print("TRYING TO SET FACTION COLOR FOR PROVINCE " + ProvinceId);
+
+                if (Province == null || string.IsNullOrEmpty(Province.FactionId))
+
+                {
+
+                    GD.Print($"Province {ProvinceId} has no faction, using neutral color");
+
+                    BaseColor = new Color(0.3f, 0.3f, 0.3f, 0.5f);
+
+                    break;
+
+                }
+
+                var faction = FactionMap.Get(Province.FactionId);
+
+                GD.Print($"Province {ProvinceId} belongs to faction {faction.Id} with color {faction.Color}");
+
+                BaseColor = faction.Color;
                 break;
+            
             case MapMode.Province:
                 BaseColor = new Color(0.4f, 0.6f, 1f, 0.5f);
-                HoverColor = new Color(0.4f, 0.6f, 1f, 0.8f);
-                SelectedColor = new Color(0.6f, 0.8f, 1f, 0.8f);
                 break;
+            
             case MapMode.Food:
                 SetFoodMapModeColors(Province);
                 break;
         }
+        
     }
     
     private void SetFoodMapModeColors(Province.Entity.Province p)
@@ -116,60 +142,90 @@ public partial class ProvinceArea : Area2D
         float max = 10f;
         float t = Mathf.Clamp(food / max, 0f, 1f);
 
-        Color color = new Color(
-            1f - t,
-            t,
-            0f
-        );
-
+        Color color = new Color(1f - t, t, 0f);
         BaseColor = new Color(color.R, color.G, color.B, 0.5f);
-        HoverColor = new Color(color.R, color.G, color.B, 0.8f);
-        SelectedColor = new Color(color.R, color.G, 0.3f, 0.9f);
     }
     
     private void UpdateVisual()
     {
-        Color color;
-        
-        if (IsSelected) color = SelectedColor;
-        else if (IsHovered) color = HoverColor;
-        else color = BaseColor;
-
-        foreach (Node node in GetChildren())
-        {
-            if (node is Polygon2D poly)
-            {
-                poly.Color = color;
-            }
-        }
+        UpdateBase();
+        UpdateOverlay();
     }
     
-    public void BuildGeometry(Vector2[][] polygons, Color color)
+    private void UpdateBase()
     {
+        foreach (var poly in BasePolygons)
+            poly.Color = BaseColor;
+    }
+    
+    private void UpdateOverlay()
+    {
+        Color overlayColor;
+
+        if (IsSelected)
+            overlayColor = new Color(1, 1, 1, 0.4f);
+
+        else if (IsHovered)
+            overlayColor = new Color(1, 1, 1, 0.2f);
+
+        else
+            overlayColor = new Color(0, 0, 0, 0);
+
+        foreach (var overlay in Overlays)
+            overlay.Color = overlayColor;
+    }
+    
+    
+    
+    public void BuildGeometry(Vector2[][] polygons, Color color)
+
+    {
+
         foreach (var poly in polygons)
+
         {
             var collision = new CollisionPolygon2D { Polygon = poly };
-
-            var polygon = new Polygon2D
+            var basePoly = new Polygon2D
             {
                 Polygon = poly,
                 Color = color
             };
+            
+            BasePolygons.Add(basePoly);
+
+            var overlay = new Polygon2D
+
+            {
+                Polygon = poly,
+                Color = new Color(1, 1, 0, 0),
+                ZIndex = 10
+            };
+            
+            Overlays.Add(overlay);
 
             var line = new Line2D
+
             {
                 Width = 2,
                 DefaultColor = Colors.Black
             };
 
             var closed = new List<Vector2>(poly);
+
             closed.Add(poly[0]);
+
             line.Points = closed.ToArray();
 
             AddChild(line);
+
             AddChild(collision);
-            AddChild(polygon);
+
+            AddChild(basePoly);
+
+            AddChild(overlay);
+
         }
+
     }
     
 }
