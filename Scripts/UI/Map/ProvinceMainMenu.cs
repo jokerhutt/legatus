@@ -29,6 +29,7 @@ public partial class ProvinceMainMenu : MarginContainer
     private Label TerrainName;
     private TextureRect TerrainIcon;
     private Button CloseButton;
+    private Button OwnerButton;
 
     // == ARMY ==
     [Export] public VBoxContainer ArmyColumn;
@@ -39,6 +40,7 @@ public partial class ProvinceMainMenu : MarginContainer
     private PackedScene _buildingSlotsScene = GD.Load<PackedScene>("res://Scenes/UI/ProvinceMenu/ProvinceBuildingSlot.tscn");
 
     public System.Action OnClose;
+    public System.Action<string> OnOwnerButtonPressed;
 
     public override void _Ready()
     {
@@ -46,9 +48,23 @@ public partial class ProvinceMainMenu : MarginContainer
         OwnerName = GetNode<Label>("%OwnerName");
         TerrainName = GetNode<Label>("%TerrainName");
         TerrainIcon = GetNode<TextureRect>("%TerrainIcon");
+        OwnerButton = GetNode<Button>("%OwnerButton");
 
         CloseButton = GetNode<Button>("%CloseButton");
         CloseButton.Pressed += () => OnClose?.Invoke();
+        OwnerButton.Pressed += () => OnSelectFaction();
+    }
+    
+    private void OnSelectFaction()
+    {
+        if (_provinceId == null)
+            return;
+
+        var province = _provinceService.GetProvince(_provinceId);
+        if (province == null)
+            return;
+
+        OnOwnerButtonPressed?.Invoke(province.FactionId);
     }
 
     public void Init(
