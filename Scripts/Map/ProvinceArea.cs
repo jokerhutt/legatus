@@ -11,8 +11,6 @@ public partial class ProvinceArea : Area2D
 {
     [Export] public string ProvinceId;
     [Export] public Color BaseColor = new Color(1, 1, 1, 0.5f);
-    [Export] public Color HoverColor = new Color(1, 1, 1, 0.8f);
-    [Export] public Color SelectedColor = new Color(1, 1, 0.5f, 0.8f);
     
     private ProvinceMap ProvinceMap;
     private FactionMap FactionMap;
@@ -22,6 +20,9 @@ public partial class ProvinceArea : Area2D
     
     private bool IsHovered = false;
     private bool IsSelected = false;
+    
+    private List<Polygon2D> BasePolygons = new();
+    private List<Polygon2D> Overlays = new(); 
 
     public override void _Ready()
     {
@@ -94,8 +95,6 @@ public partial class ProvinceArea : Area2D
         {
             case MapMode.Default:
                 BaseColor = new Color(1, 1, 1, 0.5f);
-                HoverColor = new Color(1, 1, 1, 0.8f);
-                SelectedColor = new Color(1, 1, 0.5f, 0.8f);
                 break;
             case MapMode.Faction:
 
@@ -109,10 +108,6 @@ public partial class ProvinceArea : Area2D
 
                     BaseColor = new Color(0.3f, 0.3f, 0.3f, 0.5f);
 
-                    HoverColor = new Color(0.6f, 0.4f, 0.2f, 0.8f);
-
-                    SelectedColor = new Color(0.8f, 0.6f, 0.4f, 0.8f);
-
                     break;
 
                 }
@@ -122,17 +117,12 @@ public partial class ProvinceArea : Area2D
                 GD.Print($"Province {ProvinceId} belongs to faction {faction.Id} with color {faction.Color}");
 
                 BaseColor = faction.Color;
-
-                HoverColor = new Color(0.6f, 0.4f, 0.2f, 0.8f);
-
-                SelectedColor = new Color(0.8f, 0.6f, 0.4f, 0.8f);
-
                 break;
+            
             case MapMode.Province:
                 BaseColor = new Color(0.4f, 0.6f, 1f, 0.5f);
-                HoverColor = new Color(0.4f, 0.6f, 1f, 0.8f);
-                SelectedColor = new Color(0.6f, 0.8f, 1f, 0.8f);
                 break;
+            
             case MapMode.Food:
                 SetFoodMapModeColors(Province);
                 break;
@@ -152,55 +142,87 @@ public partial class ProvinceArea : Area2D
             t,
             0f
         );
-
         BaseColor = new Color(color.R, color.G, color.B, 0.5f);
-        HoverColor = new Color(color.R, color.G, color.B, 0.8f);
-        SelectedColor = new Color(color.R, color.G, 0.3f, 0.9f);
     }
     
     private void UpdateVisual()
     {
-        Color color;
-        
-        if (IsSelected) color = SelectedColor;
-        else if (IsHovered) color = HoverColor;
-        else color = BaseColor;
+        UpdateBase();
+        UpdateOverlay();
+    }
+    
+    private void UpdateBase()
+    {
+        foreach (var poly in BasePolygons)
+            poly.Color = BaseColor;
+    }
+    
+    private void UpdateOverlay()
+    {
+        Color overlayColor;
 
-        foreach (Node node in GetChildren())
-        {
-            if (node is Polygon2D poly)
-            {
-                poly.Color = color;
-            }
-        }
+        if (IsSelected)
+            overlayColor = new Color(1, 1, 0, 0.4f);
+
+        else if (IsHovered)
+            overlayColor = new Color(1, 1, 1, 0.2f);
+
+        else
+            overlayColor = new Color(0, 0, 0, 0);
+
+        foreach (var overlay in Overlays)
+            overlay.Color = overlayColor;
     }
     
     public void BuildGeometry(Vector2[][] polygons, Color color)
+
     {
+
         foreach (var poly in polygons)
+
         {
             var collision = new CollisionPolygon2D { Polygon = poly };
-
-            var polygon = new Polygon2D
+            var basePoly = new Polygon2D
             {
                 Polygon = poly,
                 Color = color
             };
+            
+            BasePolygons.Add(basePoly);
+
+            var overlay = new Polygon2D
+
+            {
+                Polygon = poly,
+                Color = new Color(1, 1, 0, 0),
+                ZIndex = 10
+            };
+            
+            Overlays.Add(overlay);
 
             var line = new Line2D
+
             {
                 Width = 2,
                 DefaultColor = Colors.Black
             };
 
             var closed = new List<Vector2>(poly);
+
             closed.Add(poly[0]);
+
             line.Points = closed.ToArray();
 
             AddChild(line);
+
             AddChild(collision);
-            AddChild(polygon);
+
+            AddChild(basePoly);
+
+            AddChild(overlay);
+
         }
+
     }
     
 }
