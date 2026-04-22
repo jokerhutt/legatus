@@ -70,6 +70,11 @@ public partial class ProvinceArea : Area2D
     {
         if ((SelectionType)type == SelectionType.Province && id == ProvinceId)
             IsSelected = true;
+        else if ((SelectionType)type == SelectionType.Diplomacy && id != null)
+        {
+            var province = ProvinceMap.Get(ProvinceId);
+            IsSelected = province.FactionId == id;
+        }
         else IsSelected = false;
         UpdateVisual();
     }
@@ -137,11 +142,7 @@ public partial class ProvinceArea : Area2D
         float max = 10f;
         float t = Mathf.Clamp(food / max, 0f, 1f);
 
-        Color color = new Color(
-            1f - t,
-            t,
-            0f
-        );
+        Color color = new Color(1f - t, t, 0f);
         BaseColor = new Color(color.R, color.G, color.B, 0.5f);
     }
     
@@ -162,7 +163,7 @@ public partial class ProvinceArea : Area2D
         Color overlayColor;
 
         if (IsSelected)
-            overlayColor = new Color(1, 1, 0, 0.4f);
+            overlayColor = new Color(1, 1, 1, 0.4f);
 
         else if (IsHovered)
             overlayColor = new Color(1, 1, 1, 0.2f);
@@ -173,6 +174,8 @@ public partial class ProvinceArea : Area2D
         foreach (var overlay in Overlays)
             overlay.Color = overlayColor;
     }
+    
+    
     
     public void BuildGeometry(Vector2[][] polygons, Color color)
 
